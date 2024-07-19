@@ -3,19 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightDispatcher.API", "FlightDispatcher.API\FlightDispatcher.API.csproj", "{22029E4E-21E8-4213-B59D-F18501EB892E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightDispatcher.API", "FlightDispatcher.API\FlightDispatcher.API.csproj", "{22029E4E-21E8-4213-B59D-F18501EB892E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightDispatcher.Domain", "FlightDispatcher.Domain\FlightDispatcher.Domain.csproj", "{47C8B920-E055-4DA3-A56E-DF18F0D70422}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightDispatcher.Domain", "FlightDispatcher.Domain\FlightDispatcher.Domain.csproj", "{47C8B920-E055-4DA3-A56E-DF18F0D70422}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightDispatcher.Infostructure", "FlightDispatcher.Infostructure\FlightDispatcher.Infostructure.csproj", "{13252975-3529-4B35-AC47-81531D2B806D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightDispatcher.Infostructure", "FlightDispatcher.Infostructure\FlightDispatcher.Infostructure.csproj", "{13252975-3529-4B35-AC47-81531D2B806D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightDispatcher.Shared", "FlightDispatcher.Shared\FlightDispatcher.Shared.csproj", "{645B4558-0AB6-470E-BEED-6C7DF78C0AE0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightDispatcher.Shared", "FlightDispatcher.Shared\FlightDispatcher.Shared.csproj", "{645B4558-0AB6-470E-BEED-6C7DF78C0AE0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8E67E0DF-1C87-4A07-882C-56916652F687}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightDispatcher.Api.Test", "FlightDispatcher.Api.Test\FlightDispatcher.Api.Test.csproj", "{3DCA0166-6084-4A5B-9D80-3826A0030FBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightDispatcher.Api.Test", "FlightDispatcher.Api.Test\FlightDispatcher.Api.Test.csproj", "{3DCA0166-6084-4A5B-9D80-3826A0030FBD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightDispatcher.Domain.Test", "FlightDispatcher.Domain.Test\FlightDispatcher.Domain.Test.csproj", "{BAC1DADB-C8DC-43AC-9E2C-F6DC9BA1C6C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightDispatcher.Domain.Test", "FlightDispatcher.Domain.Test\FlightDispatcher.Domain.Test.csproj", "{BAC1DADB-C8DC-43AC-9E2C-F6DC9BA1C6C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightDispatcher.Infostructure.Test", "FlightDispatcher.Infostructure.Test\FlightDispatcher.Infostructure.Test.csproj", "{84784C51-2D17-481A-A8E0-79150E135C43}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{BAC1DADB-C8DC-43AC-9E2C-F6DC9BA1C6C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAC1DADB-C8DC-43AC-9E2C-F6DC9BA1C6C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAC1DADB-C8DC-43AC-9E2C-F6DC9BA1C6C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84784C51-2D17-481A-A8E0-79150E135C43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84784C51-2D17-481A-A8E0-79150E135C43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84784C51-2D17-481A-A8E0-79150E135C43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84784C51-2D17-481A-A8E0-79150E135C43}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,6 +60,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{3DCA0166-6084-4A5B-9D80-3826A0030FBD} = {8E67E0DF-1C87-4A07-882C-56916652F687}
 		{BAC1DADB-C8DC-43AC-9E2C-F6DC9BA1C6C2} = {8E67E0DF-1C87-4A07-882C-56916652F687}
+		{84784C51-2D17-481A-A8E0-79150E135C43} = {8E67E0DF-1C87-4A07-882C-56916652F687}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AA9E603B-7D47-4035-9A6B-5ACB6B5A57F5}

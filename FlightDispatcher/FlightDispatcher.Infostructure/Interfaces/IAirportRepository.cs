@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace FlightDispatcher.Infostructure.Interfaces
 {
-    public interface IAirlineRepository: IRepositoryBase<AirlineDocument>, IRepositoryEditable<AirlineDocument>, IRepositoryErasable
+    public interface IAirportRepository : IRepositoryBase<AirportDocument>, IRepositoryEditable<AirportDocument>, IRepositoryErasable
     {
-
     }
 }

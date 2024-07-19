@@ -12,31 +12,31 @@ namespace FlightDispatcher.Infostructure.Repositories
 {
     public class AirlineRepository : IAirlineRepository
     {
-        private readonly IMongoCollection<AirLineDocument> _collection;
+        private readonly IMongoCollection<AirlineDocument> _collection;
 
         public AirlineRepository(IMongoDatabase database)
         {
-            _collection = database.GetCollection<AirLineDocument>("AirLine");
+            _collection = database.GetCollection<AirlineDocument>("Airlines");
         }
 
         #region CRUD Methods
-        public async Task<List<AirLineDocument>> GetAll()
+        public async Task<List<AirlineDocument>> GetAll()
         {
             return await _collection.Find(_ => true).ToListAsync();
         }
 
-        public async Task<AirLineDocument> GetById(ObjectId id)
+        public async Task<AirlineDocument> GetById(ObjectId id)
         {
             return await _collection.Find(doc => doc.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task<AirLineDocument> Create(AirLineDocument document)
+        public async Task<AirlineDocument> Create(AirlineDocument document)
         {
             await _collection.InsertOneAsync(document);
             return document;
         }
 
-        public async Task<AirLineDocument> Update(AirLineDocument document)
+        public async Task<AirlineDocument> Update(AirlineDocument document)
         {
             await _collection.ReplaceOneAsync(doc => doc.Id == document.Id, document);
             return document;

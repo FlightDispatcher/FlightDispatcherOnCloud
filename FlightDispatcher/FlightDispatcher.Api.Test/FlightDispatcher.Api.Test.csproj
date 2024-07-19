@@ -17,6 +17,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FlightDispatcher.API\FlightDispatcher.API.csproj" />
+    <ProjectReference Include="..\FlightDispatcher.Domain\FlightDispatcher.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="Xunit" />
   </ItemGroup>
 

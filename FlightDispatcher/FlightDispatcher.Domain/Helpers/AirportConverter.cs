@@ -13,10 +13,10 @@ namespace FlightDispatcher.Domain.Helpers
         This Converter Class transform AirportModel object in AirportDocument object and viceversa
      */
 
-    public class AirportConverter
+    public static class AirportConverter
     {
         #region Document -> Model
-        public static AirportModel ToModel(AirportDocument document)
+        public static AirportModel ToModel(this AirportDocument document)
         {
             return new AirportModel
             {
@@ -28,14 +28,14 @@ namespace FlightDispatcher.Domain.Helpers
             };
         }
 
-        public static List<AirportModel> ToModelList(List<AirportDocument> documents)
+        public static List<AirportModel> ToModelList(this List<AirportDocument> documents)
         {
             return documents.Select(ToModel).ToList();
         }
         #endregion
 
         #region Model -> Document
-        public static AirportDocument ToDocument(AirportModel model)
+        public static AirportDocument ToDocument(this AirportModel model)
         {
             return new AirportDocument
             {
@@ -47,7 +47,7 @@ namespace FlightDispatcher.Domain.Helpers
             };
         }
 
-        public static List<AirportDocument> ToDocumentList(List<AirportModel> models)
+        public static List<AirportDocument> ToDocumentList(this List<AirportModel> models)
         {
             return models.Select(ToDocument).ToList();
         }

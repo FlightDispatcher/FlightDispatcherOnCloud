@@ -11,7 +11,7 @@ namespace FlightDispatcher.API.Helpers
     public static class FlightRouteConverter
     {
         #region DTO -> Model
-        public static FlightRouteModel ToModel(FlightRouteDTO dto)
+        public static FlightRouteModel ToModel(this FlightRouteDTO dto)
         {
             return new FlightRouteModel
             {
@@ -39,14 +39,14 @@ namespace FlightDispatcher.API.Helpers
             };
         }
 
-        public static List<FlightRouteModel> ToModelList(List<FlightRouteDTO> dtos)
+        public static List<FlightRouteModel> ToModelList(this List<FlightRouteDTO> dtos)
         {
             return dtos.Select(ToModel).ToList();
         }
         #endregion
 
         #region Model -> DTO
-        public static FlightRouteDTO ToDTO(FlightRouteModel model)
+        public static FlightRouteDTO ToDTO(this FlightRouteModel model)
         {
             return new FlightRouteDTO
             {
@@ -74,7 +74,7 @@ namespace FlightDispatcher.API.Helpers
             };
         }
 
-        public static List<FlightRouteDTO> ToDTOList(List<FlightRouteModel> models)
+        public static List<FlightRouteDTO> ToDTOList(this List<FlightRouteModel> models)
         {
             return models.Select(ToDTO).ToList();
         }

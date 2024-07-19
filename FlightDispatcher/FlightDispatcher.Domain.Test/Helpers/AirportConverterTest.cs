@@ -26,7 +26,7 @@ namespace FlightDispatcher.Domain.Test.Helpers
             };
 
             // Act
-            var model = AirportConverter.ToModel(document);
+            var model = document.ToModel();
 
             // Assert
             Assert.Equal(document.Id.ToString(), model.Id);
@@ -50,7 +50,7 @@ namespace FlightDispatcher.Domain.Test.Helpers
             };
 
             // Act
-            var document = AirportConverter.ToDocument(model);
+            var document = model.ToDocument();
 
             // Assert
             Assert.Equal(ObjectId.Parse(model.Id), document.Id);

@@ -16,7 +16,7 @@ namespace FlightDispatcher.Domain.Helpers
     public static class FlightRouteConverter
     {
         #region Document -> Model
-        public static FlightRouteModel ToModel(FlightRouteDocument document)
+        public static FlightRouteModel ToModel(this FlightRouteDocument document)
         {
             return new FlightRouteModel
             {
@@ -44,14 +44,14 @@ namespace FlightDispatcher.Domain.Helpers
             };
         }
 
-        public static List<FlightRouteModel> ToModelList(List<FlightRouteDocument> documents)
+        public static List<FlightRouteModel> ToModelList(this List<FlightRouteDocument> documents)
         {
             return documents.Select(ToModel).ToList();
         }
         #endregion
 
         #region Model -> Document
-        public static FlightRouteDocument ToDocument(FlightRouteModel model)
+        public static FlightRouteDocument ToDocument(this FlightRouteModel model)
         {
             return new FlightRouteDocument
             {
@@ -79,7 +79,7 @@ namespace FlightDispatcher.Domain.Helpers
             };
         }
 
-        public static List<FlightRouteDocument> ToDocumentList(List<FlightRouteModel> models)
+        public static List<FlightRouteDocument> ToDocumentList(this List<FlightRouteModel> models)
         {
             return models.Select(ToDocument).ToList();
         }

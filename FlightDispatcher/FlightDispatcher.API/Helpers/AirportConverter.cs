@@ -11,7 +11,7 @@ namespace FlightDispatcher.API.Helpers
     public static class AirportConverter
     {
         #region DTO -> Model
-        public static AirportModel ToModel(AirportDTO dto)
+        public static AirportModel ToModel(this AirportDTO dto)
         {
             return new AirportModel
             {
@@ -23,14 +23,14 @@ namespace FlightDispatcher.API.Helpers
             };
         }
 
-        public static List<AirportModel> ToModelList(List<AirportDTO> dtos)
+        public static List<AirportModel> ToModelList(this List<AirportDTO> dtos)
         {
             return dtos.Select(ToModel).ToList();
         }
         #endregion
 
         #region Model -> DTO
-        public static AirportDTO ToDTO(AirportModel model)
+        public static AirportDTO ToDTO(this AirportModel model)
         {
             return new AirportDTO
             {
@@ -42,7 +42,7 @@ namespace FlightDispatcher.API.Helpers
             };
         }
 
-        public static List<AirportDTO> ToDTOList(List<AirportModel> models)
+        public static List<AirportDTO> ToDTOList(this List<AirportModel> models)
         {
             return models.Select(ToDTO).ToList();
         }

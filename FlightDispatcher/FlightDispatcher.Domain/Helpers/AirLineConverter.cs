@@ -16,7 +16,7 @@ namespace FlightDispatcher.Domain.Helpers
     public static class AirlineConverter
     {
         #region Document -> Model
-        public static AirlineModel ToModel(AirlineDocument document)
+        public static AirlineModel ToModel(this AirlineDocument document)
         {
             return new AirlineModel
             {
@@ -27,14 +27,14 @@ namespace FlightDispatcher.Domain.Helpers
             };
         }
 
-        public static List<AirlineModel> ToModelList(List<AirlineDocument> documents)
+        public static List<AirlineModel> ToModelList(this List<AirlineDocument> documents)
         {
             return documents.Select(ToModel).ToList();
         }
         #endregion
 
         #region Model -> Document
-        public static AirlineDocument ToDocument(AirlineModel model)
+        public static AirlineDocument ToDocument(this AirlineModel model)
         {
             return new AirlineDocument
             {
@@ -45,7 +45,7 @@ namespace FlightDispatcher.Domain.Helpers
             };
         }
 
-        public static List<AirlineDocument> ToDocumentList(List<AirlineModel> models)
+        public static List<AirlineDocument> ToDocumentList(this List<AirlineModel> models)
         {
             return models.Select(ToDocument).ToList();
         }

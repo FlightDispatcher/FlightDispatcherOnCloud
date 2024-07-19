@@ -27,7 +27,7 @@ namespace FlightDispatcher.Domain.Test.Helpers
             };
 
             // Act
-            var model = FlightRouteConverter.ToModel(document);
+            var model = document.ToModel();
 
             // Assert
             Assert.Equal(document.Id.ToString(), model.Id);
@@ -59,7 +59,7 @@ namespace FlightDispatcher.Domain.Test.Helpers
             };
 
             // Act
-            var document = FlightRouteConverter.ToDocument(model);
+            var document = model.ToDocument();
 
             // Assert
             Assert.Equal(ObjectId.Parse(model.Id), document.Id);

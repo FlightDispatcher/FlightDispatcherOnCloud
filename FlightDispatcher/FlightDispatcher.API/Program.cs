@@ -1,8 +1,29 @@
+using FlightDispatcher.API.Helpers;
+using FlightDispatcher.API.Models;
+using FlightDispatcher.Infostructure.Interfaces;
+using FlightDispatcher.Infostructure.Repositories;
+using Microsoft.Extensions.Options;
+using MongoDB.Driver;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // SWAGGER
 builder.Services.AddSwaggerGen();
 
+// MongoDB Configuration
+builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDB"));
+builder.Services.AddScoped<IMongoDatabase>(x =>
+{
+    var settings = x.GetRequiredService<IOptions<MongoDBSettings>>().Value;
+
+    MongoClient client = new MongoClient(settings.GetConnectionString());
+    return client.GetDatabase(settings.DatabaseName);
+});
+
+// Register repositories
+builder.Services.AddScoped<IAirlineRepository, AirlineRepository>();
+builder.Services.AddScoped<IAirportRepository, AirportRepository>();
+builder.Services.AddScoped<IFlightRouteRepository, FlightRouteRepository>();
 
 // Add services to the container.
 

@@ -4,6 +4,9 @@ namespace FlightDispatcher.API.Helpers
 {
     public static class MongoDBSettingsHelper
     {
+        /*
+         * This extension method compiles the connections string for MongoDB
+         */
         public static string GetConnectionString(this MongoDBSettings settings)
         {
             return settings.ConnectionURI

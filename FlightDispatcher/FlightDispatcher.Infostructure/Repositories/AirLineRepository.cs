@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FlightDispatcher.Infostructure.Repositories
 {
-    public class AirlineRepository : RepositoryFullCRUD<AirlineDocument>
+    public class AirlineRepository : RepositoryFullCRUD<AirlineDocument>, IAirlineRepository
     {
 
         public AirlineRepository(IMongoDatabase database): base(database, "Airlines")

@@ -16,4 +16,8 @@
     <ProjectReference Include="..\FlightDispatcher.Infostructure\FlightDispatcher.Infostructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\Interfaces\" />
+  </ItemGroup>
+
 </Project>

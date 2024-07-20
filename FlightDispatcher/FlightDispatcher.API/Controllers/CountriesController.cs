@@ -1,5 +1,5 @@
-﻿using FlightDispatcher.Infostructure.Repositories;
-using FlightDispatcher.Domain.Helpers;
+﻿using FlightDispatcher.Domain.Helpers;
+using FlightDispatcher.Infostructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlightDispatcher.API.Controllers
@@ -9,9 +9,9 @@ namespace FlightDispatcher.API.Controllers
     public class CountriesController : Controller
     {
         private readonly ILogger<CountriesController> _logger;
-        private readonly CountryRepository _countryRepository;
+        private readonly ICountryRepository _countryRepository;
 
-        public CountriesController(ILogger<CountriesController> logger, CountryRepository countryRepository)
+        public CountriesController(ILogger<CountriesController> logger, ICountryRepository countryRepository)
         {
             _logger = logger;
             _countryRepository = countryRepository;

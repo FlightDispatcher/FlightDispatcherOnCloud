@@ -1,5 +1,5 @@
-﻿using FlightDispatcher.Infostructure.Repositories;
-using FlightDispatcher.Domain.Helpers;
+﻿using FlightDispatcher.Domain.Helpers;
+using FlightDispatcher.Infostructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlightDispatcher.API.Controllers
@@ -9,9 +9,9 @@ namespace FlightDispatcher.API.Controllers
     public class FlightRoutesController : Controller
     {
         private readonly ILogger<FlightRoutesController> _logger;
-        private readonly FlightRouteRepository _flightRouteRepository;
+        private readonly IFlightRouteRepository _flightRouteRepository;
 
-        public FlightRoutesController(ILogger<FlightRoutesController> logger, FlightRouteRepository flightRouteRepository)
+        public FlightRoutesController(ILogger<FlightRoutesController> logger, IFlightRouteRepository flightRouteRepository)
         {
             _logger = logger;
             _flightRouteRepository = flightRouteRepository;

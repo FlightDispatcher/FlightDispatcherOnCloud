@@ -1,7 +1,7 @@
 ﻿using FlightDispatcher.API.DTOs;
-using FlightDispatcher.Infostructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using FlightDispatcher.Domain.Helpers;
+using FlightDispatcher.Infostructure.Repositories;
 
 namespace FlightDispatcher.API.Controllers
 {
@@ -10,9 +10,9 @@ namespace FlightDispatcher.API.Controllers
     public class AirlineController : Controller
     {
         private readonly ILogger<AirlineController> _logger;
-        private readonly IAirlineRepository _airlineRepository;
+        private readonly AirlineRepository _airlineRepository;
 
-        public AirlineController(ILogger<AirlineController> logger, IAirlineRepository airlineRepository)
+        public AirlineController(ILogger<AirlineController> logger, AirlineRepository airlineRepository)
         {
             _logger = logger;
             _airlineRepository = airlineRepository;

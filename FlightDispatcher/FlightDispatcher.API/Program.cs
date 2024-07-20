@@ -21,6 +21,7 @@ builder.Services.AddScoped<IMongoDatabase>(x =>
 });
 
 // Register repositories
+builder.Services.AddScoped<CountryRepository>();
 builder.Services.AddScoped<AirlineRepository>();
 builder.Services.AddScoped<AirportRepository>();
 builder.Services.AddScoped<FlightRouteRepository>();

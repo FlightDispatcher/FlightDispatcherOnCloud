@@ -6,13 +6,13 @@ using FlightDispatcher.Infostructure.Repositories;
 namespace FlightDispatcher.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
-    public class AirlineController : Controller
+    [Route("api/v1/[controller]")]
+    public class AirlinesController : Controller
     {
-        private readonly ILogger<AirlineController> _logger;
+        private readonly ILogger<AirlinesController> _logger;
         private readonly AirlineRepository _airlineRepository;
 
-        public AirlineController(ILogger<AirlineController> logger, AirlineRepository airlineRepository)
+        public AirlinesController(ILogger<AirlinesController> logger, AirlineRepository airlineRepository)
         {
             _logger = logger;
             _airlineRepository = airlineRepository;

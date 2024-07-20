@@ -22,6 +22,7 @@ namespace FlightDispatcher.Domain.Test.Helpers
                 Name = "Airport One",
                 IATA = "AP1",
                 ICAO = "ICA1",
+                Location = "Loc1",
                 Country = "Country One"
             };
 
@@ -33,6 +34,7 @@ namespace FlightDispatcher.Domain.Test.Helpers
             Assert.Equal(document.Name, model.Name);
             Assert.Equal(document.IATA, model.IATA);
             Assert.Equal(document.ICAO, model.ICAO);
+            Assert.Equal(document.Location, model.Location);
             Assert.Equal(document.Country, model.Country);
         }
 
@@ -46,6 +48,7 @@ namespace FlightDispatcher.Domain.Test.Helpers
                 Name = "Airport Two",
                 IATA = "AP2",
                 ICAO = "ICA2",
+                Location = "Loc2",
                 Country = "Country Two"
             };
 
@@ -57,6 +60,7 @@ namespace FlightDispatcher.Domain.Test.Helpers
             Assert.Equal(model.Name, document.Name);
             Assert.Equal(model.IATA, document.IATA);
             Assert.Equal(model.ICAO, document.ICAO);
+            Assert.Equal(model.Location, document.Location);
             Assert.Equal(model.Country, document.Country);
         }
     }

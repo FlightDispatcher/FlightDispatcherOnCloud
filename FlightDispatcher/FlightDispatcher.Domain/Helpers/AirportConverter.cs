@@ -24,6 +24,7 @@ namespace FlightDispatcher.Domain.Helpers
                 Name = document.Name,
                 IATA = document.IATA,
                 ICAO = document.ICAO,
+                Location = document.Location,
                 Country = document.Country
             };
         }
@@ -43,6 +44,7 @@ namespace FlightDispatcher.Domain.Helpers
                 Name = model.Name,
                 IATA = model.IATA,
                 ICAO = model.ICAO,
+                Location = model.Location,
                 Country = model.Country
             };
         }

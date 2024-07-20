@@ -10,24 +10,24 @@ using System.Threading.Tasks;
 
 namespace FlightDispatcher.Infostructure.Test.Repositories
 {
-    public class AirlineRepositoryTest
+    public class AirportRepositoryTest
     {
         private readonly IMongoDatabase _testDatabase;
-        private readonly AirlineRepository _repository;
+        private readonly AirportRepository _repository;
 
-        public AirlineRepositoryTest()
+        public AirportRepositoryTest()
         {
             var mongoClient = new MongoClient("mongodb+srv://fausto:VSpo9kh9ROvmmCEp@flightdispatcherdev.xckqibi.mongodb.net/?retryWrites=true&w=majority&appName=FlightDispatcherDEV"); // Replace with your MongoDB connection string
-            _testDatabase = mongoClient.GetDatabase("FlightDispatcherDBTest"); // Create a test database
-            _repository = new AirlineRepository(_testDatabase);
+            _testDatabase = mongoClient.GetDatabase("FlightDispatcherDBTest");
+            _repository = new AirportRepository(_testDatabase);
         }
 
         [Fact]
         public async Task GetAll_ReturnsAllDocuments()
         {
             // Arrange
-            var document1 = new AirlineDocument { Id = ObjectId.GenerateNewId(), Name = "Airline One", IATA = "IATA1", ICAO = "ICAO1" };
-            var document2 = new AirlineDocument { Id = ObjectId.GenerateNewId(), Name = "Airline Two", IATA = "IATA2", ICAO = "ICAO2" };
+            var document1 = new AirportDocument { Id = ObjectId.GenerateNewId(), Name = "Airport One", IATA = "IATA1", ICAO = "ICAO1", Country = "UK" };
+            var document2 = new AirportDocument { Id = ObjectId.GenerateNewId(), Name = "Airport Two", IATA = "IATA2", ICAO = "ICAO2", Country = "UK" };
             await _repository.Create(document1);
             await _repository.Create(document2);
 
@@ -44,7 +44,7 @@ namespace FlightDispatcher.Infostructure.Test.Repositories
         public async Task GetById_ReturnsDocumentById()
         {
             // Arrange
-            var document = new AirlineDocument { Id = ObjectId.GenerateNewId(), Name = "Airline Three", IATA = "IATA1", ICAO = "ICAO1" };
+            var document = new AirportDocument { Id = ObjectId.GenerateNewId(), Name = "Airport Three", IATA = "IATA1", ICAO = "ICAO1", Country = "Italy" };
             await _repository.Create(document);
 
             // Act
@@ -59,7 +59,7 @@ namespace FlightDispatcher.Infostructure.Test.Repositories
         public async Task Insert_AddsNewDocument()
         {
             // Arrange
-            var newDocument = new AirlineDocument { Name = "New Airline", IATA = "IATA1", ICAO = "ICAO1" };
+            var newDocument = new AirportDocument { Name = "New Airport", IATA = "IATA1", ICAO = "ICAO1", Country = "UK" };
 
             // Act
             newDocument = await _repository.Create(newDocument);
@@ -67,34 +67,36 @@ namespace FlightDispatcher.Infostructure.Test.Repositories
 
             // Assert
             Assert.NotNull(insertedDocument);
-            Assert.Equal("New Airline", insertedDocument.Name);
+            Assert.Equal("New Airport", insertedDocument.Name);
         }
 
         [Fact]
         public async Task Update_UpdatesExistingDocument()
         {
             // Arrange
-            var existingDocument = new AirlineDocument { Name = "Old Airline" , IATA = "oldIATA", ICAO = "oldICAO"};
+            var existingDocument = new AirportDocument { Name = "Old Airport", IATA = "oldIATA", ICAO = "oldICAO", Country = "UK" };
             existingDocument = await _repository.Create(existingDocument);
 
             // Act
-            existingDocument.Name = "Updated Airline";
+            existingDocument.Name = "Updated Airport";
             existingDocument.IATA = "newIATA";
             existingDocument.ICAO = "newICAO";
+            existingDocument.Country = "Spain";
             var updatedDocument = await _repository.Update(existingDocument);
 
             // Assert
             Assert.NotNull(updatedDocument);
-            Assert.Equal("Updated Airline", updatedDocument.Name);
+            Assert.Equal("Updated Airport", updatedDocument.Name);
             Assert.Equal("newIATA", updatedDocument.IATA);
             Assert.Equal("newICAO", updatedDocument.ICAO);
+            Assert.Equal("Spain", updatedDocument.Country);
         }
 
         [Fact]
         public async Task Delete_RemovesDocumentById()
         {
             // Arrange
-            var documentToDelete = new AirlineDocument { Name = "Airline To Delete", IATA = "IATA", ICAO = "ICAO" };
+            var documentToDelete = new AirportDocument { Name = "Airport To Delete", IATA = "IATA", ICAO = "ICAO", Country = "Italy" };
             documentToDelete = await _repository.Create(documentToDelete);
 
             // Act

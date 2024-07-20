@@ -19,6 +19,7 @@ namespace FlightDispatcher.API.Helpers
                 Name = dto.Name,
                 IATA = dto.IATA,
                 ICAO = dto.ICAO,
+                Location = dto.Location,
                 Country = dto.Country
             };
         }
@@ -38,6 +39,7 @@ namespace FlightDispatcher.API.Helpers
                 Name = model.Name,
                 IATA = model.IATA,
                 ICAO = model.ICAO,
+                Location = model.Location,
                 Country = model.Country
             };
         }

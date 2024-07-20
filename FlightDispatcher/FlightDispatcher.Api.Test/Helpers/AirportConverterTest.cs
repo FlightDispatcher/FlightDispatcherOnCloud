@@ -21,6 +21,7 @@ namespace FlightDispatcher.Api.Test.Helpers
                 Name = "Sample Airport",
                 IATA = "SA",
                 ICAO = "SAM",
+                Location = "Sample Location",
                 Country = "Sample Country"
             };
 
@@ -32,6 +33,7 @@ namespace FlightDispatcher.Api.Test.Helpers
             Assert.Equal(dto.Name, model.Name);
             Assert.Equal(dto.IATA, model.IATA);
             Assert.Equal(dto.ICAO, model.ICAO);
+            Assert.Equal(dto.Location, model.Location);
             Assert.Equal(dto.Country, model.Country);
         }
 
@@ -41,8 +43,8 @@ namespace FlightDispatcher.Api.Test.Helpers
             // Arrange
             var dtos = new List<AirportDTO>
         {
-            new AirportDTO { Id = "1", Name = "Airport1", IATA = "A1", ICAO = "ICAO1", Country = "Country1" },
-            new AirportDTO { Id = "2", Name = "Airport2", IATA = "A2", ICAO = "ICAO2", Country = "Country2" }
+            new AirportDTO { Id = "1", Name = "Airport1", IATA = "A1", ICAO = "ICAO1", Location = "Loc1", Country = "Country1" },
+            new AirportDTO { Id = "2", Name = "Airport2", IATA = "A2", ICAO = "ICAO2", Location = "Loc2", Country = "Country2" }
         };
 
             // Act
@@ -56,6 +58,7 @@ namespace FlightDispatcher.Api.Test.Helpers
                 Assert.Equal(dtos[i].Name, models[i].Name);
                 Assert.Equal(dtos[i].IATA, models[i].IATA);
                 Assert.Equal(dtos[i].ICAO, models[i].ICAO);
+                Assert.Equal(dtos[i].Location, models[i].Location);
                 Assert.Equal(dtos[i].Country, models[i].Country);
             }
         }
@@ -70,6 +73,7 @@ namespace FlightDispatcher.Api.Test.Helpers
                 Name = "Sample Airport",
                 IATA = "SA",
                 ICAO = "SAM",
+                Location = "Sample Location",
                 Country = "Sample Country"
             };
 
@@ -81,6 +85,7 @@ namespace FlightDispatcher.Api.Test.Helpers
             Assert.Equal(model.Name, dto.Name);
             Assert.Equal(model.IATA, dto.IATA);
             Assert.Equal(model.ICAO, dto.ICAO);
+            Assert.Equal(model.Location, dto.Location);
             Assert.Equal(model.Country, dto.Country);
         }
 
@@ -90,8 +95,8 @@ namespace FlightDispatcher.Api.Test.Helpers
             // Arrange
             var models = new List<AirportModel>
         {
-            new AirportModel { Id = "1", Name = "Airport1", IATA = "A1", ICAO = "ICAO1", Country = "Country1" },
-            new AirportModel { Id = "2", Name = "Airport2", IATA = "A2", ICAO = "ICAO2", Country = "Country2" }
+            new AirportModel { Id = "1", Name = "Airport1", IATA = "A1", ICAO = "ICAO1", Location = "Loc1", Country = "Country1" },
+            new AirportModel { Id = "2", Name = "Airport2", IATA = "A2", ICAO = "ICAO2", Location = "Loc2", Country = "Country2" }
         };
 
             // Act
@@ -105,6 +110,7 @@ namespace FlightDispatcher.Api.Test.Helpers
                 Assert.Equal(models[i].Name, dtos[i].Name);
                 Assert.Equal(models[i].IATA, dtos[i].IATA);
                 Assert.Equal(models[i].ICAO, dtos[i].ICAO);
+                Assert.Equal(models[i].Location, dtos[i].Location);
                 Assert.Equal(models[i].Country, dtos[i].Country);
             }
         }

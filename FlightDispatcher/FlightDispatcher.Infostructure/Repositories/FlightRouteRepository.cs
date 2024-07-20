@@ -13,7 +13,7 @@ namespace FlightDispatcher.Infostructure.Repositories
     public class FlightRouteRepository : RepositoryFullCRUD<FlightRouteDocument>
     {
 
-        public FlightRouteRepository(IMongoDatabase database) : base(database, "FlighRoutes")
+        public FlightRouteRepository(IMongoDatabase database) : base(database, "FlightRoutes")
         {
             
         }

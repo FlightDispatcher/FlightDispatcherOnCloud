@@ -15,7 +15,7 @@ namespace FlightDispatcher.Infostructure.Repositories
         
         public AirportRepository(IMongoDatabase database): base(database, "Airports")
         {
-
+            
         }
     }
 }

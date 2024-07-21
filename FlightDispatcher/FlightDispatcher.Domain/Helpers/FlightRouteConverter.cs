@@ -68,24 +68,30 @@ namespace FlightDispatcher.Domain.Helpers
         /// <returns>The converted <see cref="FlightRouteDocument"/>.</returns>
         public static FlightRouteDocument ToDocument(this FlightRouteModel model)
         {
+            // Se model.Id is null or empty, use ObjectId.Empty, otherwise use ObjectId.Parse.
+            ObjectId id = string.IsNullOrWhiteSpace(model.Id) ? ObjectId.Empty : ObjectId.Parse(model.Id);
+            ObjectId airlineId = string.IsNullOrWhiteSpace(model.AirLine.Id) ? ObjectId.Empty : ObjectId.Parse(model.AirLine.Id);
+            ObjectId departureId = string.IsNullOrWhiteSpace(model.DepartureAirport.Id) ? ObjectId.Empty : ObjectId.Parse(model.DepartureAirport.Id);
+            ObjectId arrivalId = string.IsNullOrWhiteSpace(model.ArrivalAirport.Id) ? ObjectId.Empty : ObjectId.Parse(model.ArrivalAirport.Id);
+
             return new FlightRouteDocument
             {
-                Id = ObjectId.Parse(model.Id),
+                Id = id,
                 AirLine = new()
                 {
-                    Id = ObjectId.Parse(model.AirLine.Id),
+                    Id = airlineId,
                     Name = model.AirLine.Name,
                     IATA = model.AirLine.IATA
                 },
                 DepartureAirport = new()
                 {
-                    Id = ObjectId.Parse(model.DepartureAirport.Id),
+                    Id = departureId,
                     Name = model.DepartureAirport.Name,
                     IATA = model.DepartureAirport.IATA
                 },
                 ArrivalAirport = new()
                 {
-                    Id = ObjectId.Parse(model.ArrivalAirport.Id),
+                    Id = arrivalId,
                     Name = model.ArrivalAirport.Name,
                     IATA = model.ArrivalAirport.IATA
                 },

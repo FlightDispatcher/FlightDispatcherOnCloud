@@ -52,9 +52,12 @@ namespace FlightDispatcher.Domain.Helpers
         /// <returns>The converted <see cref="AirlineDocument"/>.</returns>
         public static AirlineDocument ToDocument(this AirlineModel model)
         {
+            // Se model.Id is null or empty, use ObjectId.Empty, otherwise use ObjectId.Parse.
+            ObjectId id = string.IsNullOrWhiteSpace(model.Id) ? ObjectId.Empty : ObjectId.Parse(model.Id);
+
             return new AirlineDocument
             {
-                Id = ObjectId.Parse(model.Id),
+                Id = id,
                 Name = model.Name,
                 IATA = model.IATA,
                 ICAO = model.ICAO

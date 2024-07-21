@@ -63,6 +63,11 @@ namespace FlightDispatcher.API.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
                 var createdAirline = await _airlineService.Create(dto.ToModel());
                 return CreatedAtAction(nameof(GetById), new { id = createdAirline.Id }, createdAirline.ToDTO());
             }

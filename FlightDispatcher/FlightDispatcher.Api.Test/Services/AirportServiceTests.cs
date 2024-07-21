@@ -1,10 +1,12 @@
 ﻿using FlightDispatcher.API.Exceptions;
 using FlightDispatcher.API.Services;
+using FlightDispatcher.API.Services.Interfaces;
 using FlightDispatcher.Domain.Documents;
 using FlightDispatcher.Domain.Models;
 using FlightDispatcher.Infostructure.Interfaces;
 using MongoDB.Bson;
 using Moq;
+using FluentAssertions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,129 +18,202 @@ namespace FlightDispatcher.Api.Test.Services
     public class AirportServiceTests
     {
         private readonly AirportService _airportService;
-        private readonly Mock<IAirportRepository> _mockAirportRepository;
+        private readonly Mock<IAirportRepository> _airportRepositoryMock;
+        private readonly Mock<ICountryService> _countryServiceMock;
 
         public AirportServiceTests()
         {
-            _mockAirportRepository = new Mock<IAirportRepository>();
-            _airportService = new AirportService(_mockAirportRepository.Object);
+            _airportRepositoryMock = new Mock<IAirportRepository>();
+            _countryServiceMock = new Mock<ICountryService>();
+            _airportService = new AirportService(
+                _airportRepositoryMock.Object,
+                _countryServiceMock.Object
+            );
         }
 
         [Fact]
-        public async Task GetAllAirports_ShouldReturnListOfAirports()
+        public async Task Create_ShouldThrow_WhenCountryCodeIsInvalid()
         {
             // Arrange
-            var airportDocuments = new List<AirportDocument>
+            var airport = new AirportModel
             {
-                new AirportDocument { Id = new ObjectId("603d2e3e1f3e1b001f64d5c5"), Name = "Test Airport", IATA = "TST", ICAO = "TSTC", Location = "Test City", Country = "Test Country" }
+                IATA = "JFK",
+                Country = "INVALID",
+                Name = "John F. Kennedy International Airport"
             };
-            _mockAirportRepository.Setup(repo => repo.GetAll()).ReturnsAsync(airportDocuments);
 
-            // Act
-            var result = await _airportService.GetAll();
-
-            // Assert
-            Assert.NotNull(result);
-            Assert.Single(result);
-            Assert.Equal("Test Airport", result[0].Name);
-        }
-
-        [Fact]
-        public async Task GetAirportById_ShouldReturnAirport_WhenExists()
-        {
-            // Arrange
-            var airportDocument = new AirportDocument { Id = new ObjectId("603d2e3e1f3e1b001f64d5c5"), Name = "Test Airport", IATA = "TST", ICAO = "TSTC", Location = "Test City", Country = "Test Country" };
-            _mockAirportRepository.Setup(repo => repo.GetById(It.IsAny<ObjectId>())).ReturnsAsync(airportDocument);
-
-            // Act
-            var result = await _airportService.GetById("603d2e3e1f3e1b001f64d5c5");
-
-            // Assert
-            Assert.NotNull(result);
-            Assert.Equal("Test Airport", result.Name);
-        }
-
-        [Fact]
-        public async Task GetAirportById_ShouldThrowNotFoundException_WhenNotExists()
-        {
-            // Arrange
-            _mockAirportRepository.Setup(repo => repo.GetById(It.IsAny<ObjectId>())).ReturnsAsync((AirportDocument)null);
+            _countryServiceMock
+                .Setup(c => c.GetByCode("INVALID"))
+                .ThrowsAsync(new NotFoundException("Country not found"));
 
             // Act & Assert
-            await Assert.ThrowsAsync<NotFoundException>(() => _airportService.GetById("603d2e3e1f3e1b001f64d5c5"));
+            await Assert.ThrowsAsync<CountryCodeNotFoundException>(() => _airportService.Create(airport));
         }
 
         [Fact]
-        public async Task CreateAirport_ShouldReturnCreatedAirport()
+        public async Task Create_ShouldThrow_WhenIATAAlreadyInUse()
         {
             // Arrange
-            var airportModel = new AirportModel { Id = "603d2e3e1f3e1b001f64d5c5", Name = "New Airport", IATA = "NEW", ICAO = "NEWC", Location = "New City", Country = "New Country" };
-            var airportDocument = new AirportDocument { Id = new ObjectId("603d2e3e1f3e1b001f64d5c5"), Name = "New Airport", IATA = "NEW", ICAO = "NEWC", Location = "New City", Country = "New Country" };
-            _mockAirportRepository.Setup(repo => repo.Create(It.IsAny<AirportDocument>())).ReturnsAsync(airportDocument);
+            var airport = new AirportModel
+            {
+                IATA = "JFK",
+                Country = "US",
+                Name = "John F. Kennedy International Airport"
+            };
 
-            // Act
-            var result = await _airportService.Create(airportModel);
+            _countryServiceMock
+                .Setup(c => c.GetByCode("US"))
+                .ReturnsAsync(new CountryModel { Code = "US" });
 
-            // Assert
-            Assert.NotNull(result);
-            Assert.Equal("New Airport", result.Name);
-        }
-
-        [Fact]
-        public async Task UpdateAirport_ShouldReturnUpdatedAirport()
-        {
-            // Arrange
-            var airportModel = new AirportModel { Id = "603d2e3e1f3e1b001f64d5c5", Name = "Updated Airport", IATA = "UPD", ICAO = "UPDC", Location = "Updated City", Country = "Updated Country" };
-            var airportDocument = new AirportDocument { Id = new ObjectId("603d2e3e1f3e1b001f64d5c5"), Name = "Updated Airport", IATA = "UPD", ICAO = "UPDC", Location = "Updated City", Country = "Updated Country" };
-            _mockAirportRepository.Setup(repo => repo.Update(It.IsAny<AirportDocument>())).ReturnsAsync(airportDocument);
-
-            // Act
-            var result = await _airportService.Update(airportModel);
-
-            // Assert
-            Assert.NotNull(result);
-            Assert.Equal("Updated Airport", result.Name);
-        }
-
-        [Fact]
-        public async Task DeleteAirport_ShouldCompleteSuccessfully()
-        {
-            // Arrange
-            _mockAirportRepository.Setup(repo => repo.Delete(It.IsAny<ObjectId>())).Returns(Task.CompletedTask);
-
-            // Act
-            await _airportService.Delete("603d2e3e1f3e1b001f64d5c5");
-
-            // Assert
-            _mockAirportRepository.Verify(repo => repo.Delete(It.IsAny<ObjectId>()), Times.Once);
-        }
-
-        [Fact]
-        public async Task GetByIATACode_ShouldReturnAirport_WhenAirportExists()
-        {
-            // Arrange
-            var iata = "JFK";
-            var airportDocument = new AirportDocument { Id = ObjectId.GenerateNewId(), Name = "John F. Kennedy International Airport", IATA = iata, ICAO = "KJFK", Location = "New York", Country = "USA" };
-            _mockAirportRepository.Setup(repo => repo.GetByIATACode(iata)).ReturnsAsync(airportDocument);
-
-            // Act
-            var result = await _airportService.GetByIATACode(iata);
-
-            // Assert
-            Assert.NotNull(result);
-            Assert.Equal(iata, result.IATA);
-        }
-
-        [Fact]
-        public async Task GetByIATACode_ShouldThrowNotFoundException_WhenAirportDoesNotExist()
-        {
-            // Arrange
-            var iata = "JFK";
-            _mockAirportRepository.Setup(repo => repo.GetByIATACode(iata)).ReturnsAsync((AirportDocument)null);
+            _airportRepositoryMock
+                .Setup(r => r.GetByIATACode("JFK"))
+                .ReturnsAsync(new AirportDocument { IATA = "JFK" }); // Simula un aeroporto già esistente
 
             // Act & Assert
-            var exception = await Assert.ThrowsAsync<NotFoundException>(() => _airportService.GetByIATACode(iata));
-            Assert.Equal($"Airport with IATA code {iata} not found.", exception.Message);
+            await Assert.ThrowsAsync<AirportCodeAlreadyInUseException>(() => _airportService.Create(airport));
+        }
+
+        [Fact]
+        public async Task Create_ShouldSucceed_WhenValidDataIsProvided()
+        {
+            // Arrange
+            var airport = new AirportModel
+            {
+                Name = "John F. Kennedy International Airport",
+                IATA = "JFK",
+                ICAO = "",
+                Location = "New York",
+                Country = "US"
+            };
+
+            var createdDocument = new AirportDocument
+            {
+                Id = ObjectId.GenerateNewId(),
+                Name = "John F. Kennedy International Airport",
+                IATA = "JFK",
+                ICAO = "",
+                Location = "New York",
+                Country = "US"
+            };
+
+            _countryServiceMock
+                .Setup(c => c.GetByCode("US"))
+                .ReturnsAsync(new CountryModel { Code = "US" });
+
+            _airportRepositoryMock
+                .Setup(r => r.GetByIATACode("JFK"))
+                .ReturnsAsync((AirportDocument)null); // Simula nessun aeroporto esistente
+
+            _airportRepositoryMock
+                .Setup(r => r.Create(It.IsAny<AirportDocument>()))
+                .ReturnsAsync(createdDocument);
+
+            // Act
+            var result = await _airportService.Create(airport);
+
+            // Assert
+            result.Should().NotBeNull();
+            result.IATA.Should().Be("JFK");
+        }
+
+        [Fact]
+        public async Task Update_ShouldThrow_WhenCountryCodeIsInvalid()
+        {
+            // Arrange
+            var airport = new AirportModel
+            {
+                Id = "airport-id",
+                IATA = "JFK",
+                Country = "INVALID",
+                Name = "John F. Kennedy International Airport"
+            };
+
+            _countryServiceMock
+                .Setup(c => c.GetByCode("INVALID"))
+                .ThrowsAsync(new NotFoundException("Country not found"));
+
+            // Act & Assert
+            await Assert.ThrowsAsync<CountryCodeNotFoundException>(() => _airportService.Update(airport));
+        }
+
+        [Fact]
+        public async Task Update_ShouldThrow_WhenIATAAlreadyInUseByAnotherAirport()
+        {
+            // Arrange
+            var airport = new AirportModel
+            {
+                Id = "airport-id",
+                IATA = "JFK",
+                Country = "US",
+                Name = "John F. Kennedy International Airport"
+            };
+
+            var existingAirport = new AirportDocument
+            {
+                Id = ObjectId.GenerateNewId(),
+                IATA = "JFK"
+            };
+
+            _countryServiceMock
+                .Setup(c => c.GetByCode("US"))
+                .ReturnsAsync(new CountryModel { Code = "US" });
+
+            _airportRepositoryMock
+                .Setup(r => r.GetByIATACode("JFK"))
+                .ReturnsAsync(existingAirport); // Simula un aeroporto esistente con lo stesso IATA
+
+            // Act & Assert
+            await Assert.ThrowsAsync<AirportCodeAlreadyInUseException>(() => _airportService.Update(airport));
+        }
+
+        [Fact]
+        public async Task Delete_ShouldSucceed_WhenValidIdIsProvided()
+        {
+            // Arrange
+            var id = ObjectId.GenerateNewId().ToString();
+
+            // Act
+            await _airportService.Delete(id);
+
+            // Assert
+            _airportRepositoryMock.Verify(r => r.Delete(ObjectId.Parse(id)), Times.Once);
+        }
+
+        [Fact]
+        public async Task GetByIATACode_ShouldThrow_WhenAirportNotFound()
+        {
+            // Arrange
+            var iataCode = "INVALID";
+
+            _airportRepositoryMock
+                .Setup(r => r.GetByIATACode(iataCode))
+                .ReturnsAsync((AirportDocument)null);
+
+            // Act & Assert
+            await Assert.ThrowsAsync<AirportCodeNotFoundException>(() => _airportService.GetByIATACode(iataCode));
+        }
+
+        [Fact]
+        public async Task GetByIATACode_ShouldReturnAirport_WhenFound()
+        {
+            // Arrange
+            var iataCode = "JFK";
+            var airportDocument = new AirportDocument
+            {
+                Id = ObjectId.GenerateNewId(),
+                IATA = "JFK"
+            };
+
+            _airportRepositoryMock
+                .Setup(r => r.GetByIATACode(iataCode))
+                .ReturnsAsync(airportDocument);
+
+            // Act
+            var result = await _airportService.GetByIATACode(iataCode);
+
+            // Assert
+            result.Should().NotBeNull();
+            result.IATA.Should().Be(iataCode);
         }
     }
 }

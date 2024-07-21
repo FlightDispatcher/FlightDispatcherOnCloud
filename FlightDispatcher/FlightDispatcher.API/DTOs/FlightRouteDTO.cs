@@ -5,7 +5,7 @@ namespace FlightDispatcher.API.DTOs
 {
     public class FlightRouteDTO
     {
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         public FlightRouteAirlineDTO AirLine { get; set; }
 

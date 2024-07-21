@@ -137,7 +137,7 @@ namespace FlightDispatcher.Api.Test.Services
             _mockAirlineRepository.Setup(repo => repo.GetByIATACode(iata)).ReturnsAsync((AirlineDocument)null);
 
             // Act & Assert
-            var exception = await Assert.ThrowsAsync<NotFoundException>(() => _airlineService.GetByIATACode(iata));
+            var exception = await Assert.ThrowsAsync<AirlineCodeNotFoundException>(() => _airlineService.GetByIATACode(iata));
             Assert.Equal($"Airline with IATA code {iata} not found.", exception.Message);
         }
     }

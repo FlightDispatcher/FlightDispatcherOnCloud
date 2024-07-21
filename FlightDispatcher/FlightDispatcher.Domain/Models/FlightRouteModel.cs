@@ -15,7 +15,7 @@ namespace FlightDispatcher.Domain.Models
         /// <summary>
         /// Gets or sets the unique identifier of the flight route.
         /// </summary>
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         /// <summary>
         /// Gets or sets the airline associated with the flight route.

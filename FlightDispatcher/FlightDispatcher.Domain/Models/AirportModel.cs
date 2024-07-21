@@ -14,7 +14,7 @@ namespace FlightDispatcher.Domain.Models
         /// <summary>
         /// Gets or sets the unique identifier of the airport.
         /// </summary>
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the airport.

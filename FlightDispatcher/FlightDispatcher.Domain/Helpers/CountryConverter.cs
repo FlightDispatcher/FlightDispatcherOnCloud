@@ -49,9 +49,12 @@ namespace FlightDispatcher.Domain.Helpers
         /// <returns>The converted <see cref="CountryDocument"/>.</returns>
         public static CountryDocument ToDocument(this CountryModel model)
         {
+            // Se model.Id is null or empty, use ObjectId.Empty, otherwise use ObjectId.Parse.
+            ObjectId id = string.IsNullOrWhiteSpace(model.Id) ? ObjectId.Empty : ObjectId.Parse(model.Id);
+
             return new CountryDocument
             {
-                Id = ObjectId.Parse(model.Id),
+                Id = id,
                 Name = model.Name,
                 Code = model.Code
             };

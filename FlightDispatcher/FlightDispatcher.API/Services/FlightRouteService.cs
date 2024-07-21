@@ -15,6 +15,7 @@ namespace FlightDispatcher.API.Services
         private readonly IFlightRouteRepository _flightRouteRepository;
         private readonly IAirlineService _airlineService;
         private readonly IAirportService _airportService;
+
         public FlightRouteService(IFlightRouteRepository flightRouteRepository, IAirlineService airlineService, IAirportService airportService)
         {
             _flightRouteRepository = flightRouteRepository;
@@ -29,9 +30,12 @@ namespace FlightDispatcher.API.Services
         /// <returns>The created <see cref="FlightRouteModel"/>.</returns>
         public async Task<FlightRouteModel> Create(FlightRouteModel model)
         {
+            // Validate the model before creating
             await ValidateFlightRouteModel(model);
 
             var createdDocument = await _flightRouteRepository.Create(model.ToDocument());
+            createdDocument = await _flightRouteRepository.GetById(createdDocument.Id);
+
             return createdDocument.ToModel();
         }
 
@@ -75,6 +79,7 @@ namespace FlightDispatcher.API.Services
         /// <returns>The updated <see cref="FlightRouteModel"/>.</returns>
         public async Task<FlightRouteModel> Update(FlightRouteModel model)
         {
+            // Validate the model before updating
             await ValidateFlightRouteModel(model);
 
             var updatedDocument = await _flightRouteRepository.Update(model.ToDocument());

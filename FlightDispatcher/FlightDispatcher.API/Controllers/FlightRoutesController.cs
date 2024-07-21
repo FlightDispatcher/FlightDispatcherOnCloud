@@ -60,8 +60,23 @@ namespace FlightDispatcher.API.Controllers
         [HttpPost]
         public async Task<ActionResult<FlightRouteDTO>> Create([FromBody] FlightRouteDTO dto)
         {
-            var createdFlightRoute = await _flightRouteService.Create(dto.ToModel());
-            return CreatedAtAction(nameof(GetById), new { id = createdFlightRoute.Id }, createdFlightRoute.ToDTO());
+            try
+            {
+                var createdFlightRoute = await _flightRouteService.Create(dto.ToModel());
+                return CreatedAtAction(nameof(GetById), new { id = createdFlightRoute.Id }, createdFlightRoute.ToDTO());
+            }
+            catch (AirlineCodeNotFoundException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (AirportCodeNotFoundException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (DataDiscrepancyException ex)
+            {
+                return Conflict(ex.Message); // 409 Conflict for data discrepancies
+            }
         }
 
         /// <summary>
@@ -76,8 +91,27 @@ namespace FlightDispatcher.API.Controllers
             if (id != dto.Id)
                 return BadRequest("ID mismatch.");
 
-            var updatedFlightRoute = await _flightRouteService.Update(dto.ToModel());
-            return Ok(updatedFlightRoute);
+            try
+            {
+                var updatedFlightRoute = await _flightRouteService.Update(dto.ToModel());
+                return Ok(updatedFlightRoute);
+            }
+            catch (AirlineCodeNotFoundException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (AirportCodeNotFoundException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (DataDiscrepancyException ex)
+            {
+                return Conflict(ex.Message); // 409 Conflict for data discrepancies
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         /// <summary>
@@ -89,6 +123,7 @@ namespace FlightDispatcher.API.Controllers
         {
             await _flightRouteService.Delete(id);
             return NoContent();
+
         }
     }
 }

@@ -22,5 +22,16 @@ namespace FlightDispatcher.Infostructure.Repositories
         {
             
         }
+
+        /// <summary>
+        /// Retrieves a country document by its ISO code.
+        /// </summary>
+        /// <param name="code">The ISO code of the country.</param>
+        /// <returns>The country document with the specified code, or null if not found.</returns>
+        public async Task<CountryDocument> GetByCode(string code)
+        {
+            var filter = Builders<CountryDocument>.Filter.Eq(c => c.Code, code);
+            return await _collection.Find(filter).FirstOrDefaultAsync();
+        }
     }
 }

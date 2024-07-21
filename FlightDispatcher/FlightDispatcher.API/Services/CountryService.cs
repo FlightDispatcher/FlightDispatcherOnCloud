@@ -43,5 +43,19 @@ namespace FlightDispatcher.API.Services
 
             return document.ToModel();
         }
+
+        /// <summary>
+        /// Retrieves a country by its ISO code.
+        /// </summary>
+        /// <param name="code">The ISO code of the country.</param>
+        /// <returns>A <see cref="CountryModel"/>.</returns>
+        public async Task<CountryModel> GetByCode(string code)
+        {
+            var document = await _countryRepository.GetByCode(code);
+            if (document == null)
+                throw new NotFoundException($"Country with code {code} not found.");
+
+            return document.ToModel();
+        }
     }
 }

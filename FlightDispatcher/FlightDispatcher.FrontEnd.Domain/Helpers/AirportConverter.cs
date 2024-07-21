@@ -1,0 +1,57 @@
+﻿using FlightDispatcher.FrontEnd.Domain.DTOs;
+using FlightDispatcher.FrontEnd.Domain.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FlightDispatcher.FrontEnd.Domain.Helpers
+{
+    /* 
+        This Converter Class transform AirportModel object in AirportDTO object and viceversa
+     */
+
+    public static class AirportConverter
+    {
+        #region DTO -> Model
+        public static AirportModel ToModel(this AirportDTO dto)
+        {
+            return new AirportModel
+            {
+                Id = dto.Id,
+                Name = dto.Name,
+                IATA = dto.IATA,
+                ICAO = dto.ICAO,
+                Location = dto.Location,
+                Country = dto.Country
+            };
+        }
+
+        public static List<AirportModel> ToModelList(this List<AirportDTO> dtos)
+        {
+            return dtos.Select(ToModel).ToList();
+        }
+        #endregion
+
+        #region Model -> DTO
+        public static AirportDTO ToDTO(this AirportModel model)
+        {
+            return new AirportDTO
+            {
+                Id = model.Id,
+                Name = model.Name,
+                IATA = model.IATA,
+                ICAO = model.ICAO,
+                Location = model.Location,
+                Country = model.Country
+            };
+        }
+
+        public static List<AirportDTO> ToDTOList(this List<AirportModel> models)
+        {
+            return models.Select(ToDTO).ToList();
+        }
+        #endregion
+    }
+}

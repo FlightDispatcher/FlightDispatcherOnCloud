@@ -4,6 +4,7 @@ using FlightDispatcher.API.Services;
 using FlightDispatcher.API.Services.Interfaces;
 using FlightDispatcher.Infrastructure.Interfaces;
 using FlightDispatcher.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
@@ -20,6 +21,18 @@ builder.Services.AddScoped<IMongoDatabase>(x =>
 
     MongoClient client = new MongoClient(settings.GetConnectionString());
     return client.GetDatabase(settings.DatabaseName);
+});
+
+// Auth0 implementation
+// 1. Add Authentication Services
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.Authority = "https://dev-6cqpy6gyp63oihc0.us.auth0.com/";
+    options.Audience = "api.flightdispatcher.cloud";
 });
 
 // Register repositories
@@ -50,6 +63,7 @@ app.UseSwaggerUI(c =>
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

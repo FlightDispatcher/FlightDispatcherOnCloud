@@ -7,6 +7,7 @@ using FlightDispatcher.API.Services.Interfaces;
 using FlightDispatcher.API.DTOs;
 using FlightDispatcher.API.Helpers;
 using FlightDispatcher.API.Exceptions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FlightDispatcher.API.Controllers
 {

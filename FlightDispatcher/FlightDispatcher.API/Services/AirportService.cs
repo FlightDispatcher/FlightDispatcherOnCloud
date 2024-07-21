@@ -1,6 +1,78 @@
-﻿namespace FlightDispatcher.API.Services
+﻿using FlightDispatcher.API.Services.Interfaces;
+using FlightDispatcher.Domain.Models;
+using FlightDispatcher.Infostructure.Interfaces;
+using FlightDispatcher.API.Helpers;
+using FlightDispatcher.Domain.Helpers;
+using MongoDB.Bson;
+using FlightDispatcher.API.Exceptions;
+
+namespace FlightDispatcher.API.Services
 {
-    public class AirportService
+    /// <summary>
+    /// Service for handling operations related to airports.
+    /// </summary>
+    public class AirportService : IAirportService
     {
+        private readonly IAirportRepository _airportRepository;
+
+        public AirportService(IAirportRepository airportRepository)
+        {
+            _airportRepository = airportRepository;
+        }
+
+        /// <summary>
+        /// Creates a new airport.
+        /// </summary>
+        /// <param name="model">The airport model to be created.</param>
+        /// <returns>The created <see cref="AirportModel"/>.</returns>
+        public async Task<AirportModel> Create(AirportModel model)
+        {
+            var createdDocument = await _airportRepository.Create(model.ToDocument());
+            return createdDocument.ToModel();
+        }
+
+        /// <summary>
+        /// Deletes an airport by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the airport to be deleted.</param>
+        public async Task Delete(string id)
+        {
+            await _airportRepository.Delete(ObjectId.Parse(id));
+        }
+
+        /// <summary>
+        /// Retrieves all airports.
+        /// </summary>
+        /// <returns>A list of <see cref="AirportModel"/>.</returns>
+        public async Task<List<AirportModel>> GetAll()
+        {
+            var documents = await _airportRepository.GetAll();
+            return documents.ToModelList();
+        }
+
+        /// <summary>
+        /// Retrieves an airport by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the airport.</param>
+        /// <returns>An <see cref="AirportModel"/>.</returns>
+        public async Task<AirportModel> GetById(string id)
+        {
+            var document = await _airportRepository.GetById(ObjectId.Parse(id));
+            if (document == null)
+                throw new NotFoundException($"Airport with ID {id} not found.");
+
+            return document.ToModel();
+        }
+
+        /// <summary>
+        /// Updates an existing airport.
+        /// </summary>
+        /// <param name="model">The airport model to be updated.</param>
+        /// <returns>The updated <see cref="AirportModel"/>.</returns>
+        public async Task<AirportModel> Update(AirportModel model)
+        {
+            var updatedDocument = await _airportRepository.Update(model.ToDocument());
+            return updatedDocument.ToModel();
+        }
     }
 }

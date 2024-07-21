@@ -1,5 +1,7 @@
 using FlightDispatcher.API.Helpers;
 using FlightDispatcher.API.Models;
+using FlightDispatcher.API.Services;
+using FlightDispatcher.API.Services.Interfaces;
 using FlightDispatcher.Infostructure.Interfaces;
 using FlightDispatcher.Infostructure.Repositories;
 using Microsoft.Extensions.Options;
@@ -25,6 +27,12 @@ builder.Services.AddScoped<ICountryRepository, CountryRepository>();
 builder.Services.AddScoped<IAirlineRepository, AirlineRepository>();
 builder.Services.AddScoped<IAirportRepository, AirportRepository>();
 builder.Services.AddScoped<IFlightRouteRepository, FlightRouteRepository>();
+
+// Register Services
+builder.Services.AddScoped<ICountryService, CountryService>();
+builder.Services.AddScoped<IAirlineService, AirlineService>();
+builder.Services.AddScoped<IAirportService, AirportService>();
+builder.Services.AddScoped<IFlightRouteService, FlightRouteService>();
 
 // Add services to the container.
 

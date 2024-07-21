@@ -135,35 +135,67 @@ namespace FlightDispatcher.Api.Test.Services
         public async Task Create_ShouldSucceed_WhenValidDataIsProvided()
         {
             // Arrange
+            var flightNumber = "123";
+            var departureTime = "2024-07-21T12:00:00Z";
+            var arrivalTime = "2024-07-21T15:00:00Z";
             var flightRoute = new FlightRouteModel
             {
                 AirLine = new FlightRouteAirlineModel { Id = ObjectId.GenerateNewId().ToString(), Name = "Alitalia", IATA = "AZ" },
                 DepartureAirport = new FlightRouteAirportModel { Id = ObjectId.GenerateNewId().ToString(), IATA = "JFK", Name = "New York" },
                 ArrivalAirport = new FlightRouteAirportModel { Id = ObjectId.GenerateNewId().ToString(), IATA = "LAX", Name = "Los Angeles" },
-                FlightNumber = "123",
-                DepartureTime = "2024-07-21T12:00:00Z",
-                ArrivalTime = "2024-07-21T15:00:00Z"
+                FlightNumber = flightNumber,
+                DepartureTime = departureTime,
+                ArrivalTime = arrivalTime
             };
+
+            var airlineModel = new AirlineModel { Id = flightRoute.AirLine.Id, Name = "Alitalia", IATA = "AZ" };
+            var airportDepartureModel = new AirportModel { Id = flightRoute.DepartureAirport.Id, IATA = "JFK", Name = "New York" };
+            var airportArrivalModel = new AirportModel { Id = flightRoute.ArrivalAirport.Id, IATA = "LAX", Name = "Los Angeles" };
 
             var createdDocument = new FlightRouteDocument
             {
-                Id = ObjectId.GenerateNewId()
+                Id = ObjectId.GenerateNewId(),
+                FlightNumber = flightNumber,
+                ArrivalTime = arrivalTime,
+                DepartureTime = departureTime,
+                AirLine = new FlightRouteAirlineDocument()
+                {
+                    Id = ObjectId.Parse(airlineModel.Id),
+                    IATA = airlineModel.IATA,
+                    Name = airlineModel.Name,
+                },
+                ArrivalAirport = new FlightRouteAirportDocument()
+                {
+                    Id = ObjectId.Parse(airportArrivalModel.Id),
+                    IATA = airportArrivalModel.IATA,
+                    Name = airportArrivalModel.Name,
+                },
+                DepartureAirport = new FlightRouteAirportDocument()
+                {
+                    Id = ObjectId.Parse(airportDepartureModel.Id),
+                    IATA = airportDepartureModel.IATA,
+                    Name = airportDepartureModel.Name
+                }
             };
 
             _airlineServiceMock
                 .Setup(s => s.GetByIATACode("AZ"))
-                .ReturnsAsync(new AirlineModel { Id = flightRoute.AirLine.Id, Name = "Alitalia", IATA = "AZ" });
+                .ReturnsAsync(airlineModel);
 
             _airportServiceMock
                 .Setup(s => s.GetByIATACode("JFK"))
-                .ReturnsAsync(new AirportModel { Id = flightRoute.DepartureAirport.Id, IATA = "JFK", Name = "New York" });
+                .ReturnsAsync(airportDepartureModel);
 
             _airportServiceMock
                 .Setup(s => s.GetByIATACode("LAX"))
-                .ReturnsAsync(new AirportModel { Id = flightRoute.ArrivalAirport.Id, IATA = "LAX", Name = "Los Angeles" });
+                .ReturnsAsync(airportArrivalModel);
 
             _flightRouteRepositoryMock
                 .Setup(r => r.Create(It.IsAny<FlightRouteDocument>()))
+                .ReturnsAsync(createdDocument);
+
+            _flightRouteRepositoryMock
+                .Setup(r => r.GetById(createdDocument.Id))
                 .ReturnsAsync(createdDocument);
 
             // Act

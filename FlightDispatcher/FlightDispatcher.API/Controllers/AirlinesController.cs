@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using FlightDispatcher.Domain.Helpers;
-using FlightDispatcher.Infostructure.Interfaces;
+using FlightDispatcher.Infrastructure.Interfaces;
 using FlightDispatcher.Domain.Models;
 using FlightDispatcher.API.Services;
 using FlightDispatcher.API.Services.Interfaces;

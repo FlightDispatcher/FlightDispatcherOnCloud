@@ -1,6 +1,6 @@
 ﻿using FlightDispatcher.API.Services.Interfaces;
 using FlightDispatcher.Domain.Models;
-using FlightDispatcher.Infostructure.Interfaces;
+using FlightDispatcher.Infrastructure.Interfaces;
 using FlightDispatcher.API.Helpers;
 using FlightDispatcher.Domain.Helpers;
 using MongoDB.Bson;

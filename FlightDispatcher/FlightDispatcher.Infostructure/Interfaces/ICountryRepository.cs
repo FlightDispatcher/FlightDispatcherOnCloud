@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlightDispatcher.Infostructure.Interfaces
+namespace FlightDispatcher.Infrastructure.Interfaces
 {
     /// <summary>
     /// Interface for country repository, providing methods to perform read operations on CountryDocument.

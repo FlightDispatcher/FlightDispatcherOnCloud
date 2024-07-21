@@ -2,8 +2,8 @@ using FlightDispatcher.API.Helpers;
 using FlightDispatcher.API.Models;
 using FlightDispatcher.API.Services;
 using FlightDispatcher.API.Services.Interfaces;
-using FlightDispatcher.Infostructure.Interfaces;
-using FlightDispatcher.Infostructure.Repositories;
+using FlightDispatcher.Infrastructure.Interfaces;
+using FlightDispatcher.Infrastructure.Repositories;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 

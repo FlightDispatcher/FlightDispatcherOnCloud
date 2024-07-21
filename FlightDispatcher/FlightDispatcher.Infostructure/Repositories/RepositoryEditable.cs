@@ -1,6 +1,6 @@
 ﻿using FlightDispatcher.Domain.Documents;
 using FlightDispatcher.Domain.Interfaces;
-using FlightDispatcher.Infostructure.Interfaces;
+using FlightDispatcher.Infrastructure.Interfaces;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlightDispatcher.Infostructure.Repositories
+namespace FlightDispatcher.Infrastructure.Repositories
 {
     /// <summary>
     /// Editable repository implementation for creating and updating documents in a MongoDB collection.

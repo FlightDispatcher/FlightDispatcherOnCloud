@@ -3,7 +3,7 @@ using FlightDispatcher.API.Services;
 using FlightDispatcher.API.Services.Interfaces;
 using FlightDispatcher.Domain.Documents;
 using FlightDispatcher.Domain.Models;
-using FlightDispatcher.Infostructure.Interfaces;
+using FlightDispatcher.Infrastructure.Interfaces;
 using MongoDB.Bson;
 using Moq;
 using System;
@@ -119,8 +119,8 @@ namespace FlightDispatcher.Api.Test.Services
                 DepartureAirport = new FlightRouteAirportModel { IATA = "JFK" },
                 ArrivalAirport = new FlightRouteAirportModel { IATA = "LAX" },
                 FlightNumber = "123",
-                DepartureTime = "2024-07-21T12:00:00Z",
-                ArrivalTime = "2024-07-21T15:00:00Z"
+                DepartureTime = "12:00",
+                ArrivalTime = "15:00"
             };
 
             _airlineServiceMock
@@ -136,8 +136,8 @@ namespace FlightDispatcher.Api.Test.Services
         {
             // Arrange
             var flightNumber = "123";
-            var departureTime = "2024-07-21T12:00:00Z";
-            var arrivalTime = "2024-07-21T15:00:00Z";
+            var departureTime = "12:00";
+            var arrivalTime = "15:00";
             var flightRoute = new FlightRouteModel
             {
                 AirLine = new FlightRouteAirlineModel { Id = ObjectId.GenerateNewId().ToString(), Name = "Alitalia", IATA = "AZ" },
@@ -216,8 +216,8 @@ namespace FlightDispatcher.Api.Test.Services
                 DepartureAirport = new FlightRouteAirportModel { IATA = "JFK" },
                 ArrivalAirport = new FlightRouteAirportModel { IATA = "LAX" },
                 FlightNumber = "123",
-                DepartureTime = "2024-07-21T12:00:00Z",
-                ArrivalTime = "2024-07-21T15:00:00Z"
+                DepartureTime = "12:00",
+                ArrivalTime = "15:00"
             };
 
             _airlineServiceMock

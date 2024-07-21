@@ -1,5 +1,5 @@
 ﻿using FlightDispatcher.Domain.Documents;
-using FlightDispatcher.Infostructure.Interfaces;
+using FlightDispatcher.Infrastructure.Interfaces;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlightDispatcher.Infostructure.Repositories
+namespace FlightDispatcher.Infrastructure.Repositories
 {
     /// <summary>
     /// Repository implementation for managing flight route documents in a MongoDB collection.

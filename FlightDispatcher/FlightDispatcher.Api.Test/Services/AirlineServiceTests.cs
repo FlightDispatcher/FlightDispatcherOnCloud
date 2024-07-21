@@ -2,7 +2,7 @@
 using FlightDispatcher.API.Services;
 using FlightDispatcher.Domain.Documents;
 using FlightDispatcher.Domain.Models;
-using FlightDispatcher.Infostructure.Interfaces;
+using FlightDispatcher.Infrastructure.Interfaces;
 using MongoDB.Bson;
 using Moq;
 using System;

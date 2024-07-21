@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FlightDispatcher.Domain\FlightDispatcher.Domain.csproj" />
-    <ProjectReference Include="..\FlightDispatcher.Infostructure\FlightDispatcher.Infostructure.csproj" />
+    <ProjectReference Include="..\FlightDispatcher.Infostructure\FlightDispatcher.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

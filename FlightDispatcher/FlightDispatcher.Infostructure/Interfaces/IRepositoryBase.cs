@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlightDispatcher.Infostructure.Interfaces
+namespace FlightDispatcher.Infrastructure.Interfaces
 {
     public interface IRepositoryBase<TDocument>
     {

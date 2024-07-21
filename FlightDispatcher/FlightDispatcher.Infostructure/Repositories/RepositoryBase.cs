@@ -1,6 +1,6 @@
 ﻿using FlightDispatcher.Domain.Documents;
 using FlightDispatcher.Domain.Interfaces;
-using FlightDispatcher.Infostructure.Interfaces;
+using FlightDispatcher.Infrastructure.Interfaces;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlightDispatcher.Infostructure.Repositories
+namespace FlightDispatcher.Infrastructure.Repositories
 {
     /// <summary>
     /// Base repository implementation for reading data from a MongoDB collection.

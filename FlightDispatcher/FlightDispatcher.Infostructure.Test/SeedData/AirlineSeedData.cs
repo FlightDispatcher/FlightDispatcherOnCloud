@@ -1,5 +1,5 @@
 ﻿using FlightDispatcher.Domain.Documents;
-using FlightDispatcher.Infostructure.Repositories;
+using FlightDispatcher.Infrastructure.Repositories;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlightDispatcher.Infostructure.Test.SeedData
+namespace FlightDispatcher.Infrastructure.Test.SeedData
 {
     public class AirlineSeedData
     {

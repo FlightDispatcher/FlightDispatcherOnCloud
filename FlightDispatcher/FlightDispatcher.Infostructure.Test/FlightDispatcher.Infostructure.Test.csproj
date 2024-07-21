@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FlightDispatcher.Infostructure\FlightDispatcher.Infostructure.csproj" />
+    <ProjectReference Include="..\FlightDispatcher.Infostructure\FlightDispatcher.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

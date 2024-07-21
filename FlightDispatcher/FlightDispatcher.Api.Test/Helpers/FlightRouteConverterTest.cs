@@ -21,6 +21,7 @@ namespace FlightDispatcher.Api.Test.Helpers
                 AirLine = new FlightRouteAirlineDTO { Id = "AL1", Name = "Sample Airline", IATA = "SA" },
                 DepartureAirport = new FlightRouteAirportDTO { Id = "DA1", Name = "Departure Airport", IATA = "DA" },
                 ArrivalAirport = new FlightRouteAirportDTO { Id = "AA1", Name = "Arrival Airport", IATA = "AA" },
+                FlightNumber = "1",
                 DepartureTime = "10:00",
                 ArrivalTime = "13:00"
             };
@@ -39,6 +40,7 @@ namespace FlightDispatcher.Api.Test.Helpers
             Assert.Equal(dto.ArrivalAirport.Id, model.ArrivalAirport.Id);
             Assert.Equal(dto.ArrivalAirport.Name, model.ArrivalAirport.Name);
             Assert.Equal(dto.ArrivalAirport.IATA, model.ArrivalAirport.IATA);
+            Assert.Equal(dto.FlightNumber, model.FlightNumber);
             Assert.Equal(dto.DepartureTime, model.DepartureTime);
             Assert.Equal(dto.ArrivalTime, model.ArrivalTime);
         }
@@ -54,6 +56,7 @@ namespace FlightDispatcher.Api.Test.Helpers
                 AirLine = new FlightRouteAirlineDTO { Id = "AL1", Name = "Airline1", IATA = "A1" },
                 DepartureAirport = new FlightRouteAirportDTO { Id = "DA1", Name = "Departure1", IATA = "DA1" },
                 ArrivalAirport = new FlightRouteAirportDTO { Id = "AA1", Name = "Arrival1", IATA = "AA1" },
+                FlightNumber = "1",
                 DepartureTime = "10:00",
                 ArrivalTime = "13:00"
             },
@@ -62,6 +65,7 @@ namespace FlightDispatcher.Api.Test.Helpers
                 AirLine = new FlightRouteAirlineDTO { Id = "AL2", Name = "Airline2", IATA = "A2" },
                 DepartureAirport = new FlightRouteAirportDTO { Id = "DA2", Name = "Departure2", IATA = "DA2" },
                 ArrivalAirport = new FlightRouteAirportDTO { Id = "AA2", Name = "Arrival2", IATA = "AA2" },
+                FlightNumber = "2",
                 DepartureTime = "13:00",
                 ArrivalTime = "16:00"
             },
@@ -84,6 +88,7 @@ namespace FlightDispatcher.Api.Test.Helpers
                 Assert.Equal(dtos[i].ArrivalAirport.Id, models[i].ArrivalAirport.Id);
                 Assert.Equal(dtos[i].ArrivalAirport.Name, models[i].ArrivalAirport.Name);
                 Assert.Equal(dtos[i].ArrivalAirport.IATA, models[i].ArrivalAirport.IATA);
+                Assert.Equal(dtos[i].FlightNumber, models[i].FlightNumber);
                 Assert.Equal(dtos[i].DepartureTime, models[i].DepartureTime);
                 Assert.Equal(dtos[i].ArrivalTime, models[i].ArrivalTime);
             }
@@ -99,6 +104,7 @@ namespace FlightDispatcher.Api.Test.Helpers
                 AirLine = new FlightRouteAirlineModel { Id = "AL1", Name = "Sample Airline", IATA = "SA" },
                 DepartureAirport = new FlightRouteAirportModel { Id = "DA1", Name = "Departure Airport", IATA = "DA" },
                 ArrivalAirport = new FlightRouteAirportModel { Id = "AA1", Name = "Arrival Airport", IATA = "AA" },
+                FlightNumber = "1",
                 DepartureTime = "10:00",
                 ArrivalTime = "13:00"
             };
@@ -117,6 +123,7 @@ namespace FlightDispatcher.Api.Test.Helpers
             Assert.Equal(dto.ArrivalAirport.Id, model.ArrivalAirport.Id);
             Assert.Equal(dto.ArrivalAirport.Name, model.ArrivalAirport.Name);
             Assert.Equal(dto.ArrivalAirport.IATA, model.ArrivalAirport.IATA);
+            Assert.Equal(dto.FlightNumber, model.FlightNumber);
             Assert.Equal(dto.DepartureTime, model.DepartureTime);
             Assert.Equal(dto.ArrivalTime, model.ArrivalTime);
         }
@@ -126,18 +133,27 @@ namespace FlightDispatcher.Api.Test.Helpers
         {
             // Arrange
             var models = new List<FlightRouteModel>
-        {
-            new FlightRouteModel
             {
-                Id = "1",
-                AirLine = new FlightRouteAirlineModel { Id = "AL1", Name = "Airline1", IATA = "A1" },
-                DepartureAirport = new FlightRouteAirportModel { Id = "DA1", Name = "Departure1", IATA = "DA1" },
-                ArrivalAirport = new FlightRouteAirportModel { Id = "AA1", Name = "Arrival1", IATA = "AA1" },
-                DepartureTime = "10:00",
-                ArrivalTime = "13:00"
-            },
-            // Add more sample models here
-        };
+                new FlightRouteModel
+                {
+                    Id = "1",
+                    AirLine = new FlightRouteAirlineModel { Id = "AL1", Name = "Airline1", IATA = "A1" },
+                    DepartureAirport = new FlightRouteAirportModel { Id = "DA1", Name = "Departure1", IATA = "DA1" },
+                    ArrivalAirport = new FlightRouteAirportModel { Id = "AA1", Name = "Arrival1", IATA = "AA1" },
+                    FlightNumber = "1",
+                    DepartureTime = "10:00",
+                    ArrivalTime = "13:00"
+                },
+                new FlightRouteModel {
+                    Id = "2",
+                    AirLine = new FlightRouteAirlineModel { Id = "AL2", Name = "Airline2", IATA = "A2" },
+                    DepartureAirport = new FlightRouteAirportModel { Id = "DA2", Name = "Departure2", IATA = "DA2" },
+                    ArrivalAirport = new FlightRouteAirportModel { Id = "AA2", Name = "Arrival2", IATA = "AA2" },
+                    FlightNumber = "2",
+                    DepartureTime = "13:00",
+                    ArrivalTime = "16:00"
+                }
+            };
 
             // Act
             var dtos = models.ToDTOList();
@@ -156,6 +172,7 @@ namespace FlightDispatcher.Api.Test.Helpers
                 Assert.Equal(dtos[i].ArrivalAirport.Id, models[i].ArrivalAirport.Id);
                 Assert.Equal(dtos[i].ArrivalAirport.Name, models[i].ArrivalAirport.Name);
                 Assert.Equal(dtos[i].ArrivalAirport.IATA, models[i].ArrivalAirport.IATA);
+                Assert.Equal(dtos[i].FlightNumber, models[i].FlightNumber);
                 Assert.Equal(dtos[i].DepartureTime, models[i].DepartureTime);
                 Assert.Equal(dtos[i].ArrivalTime, models[i].ArrivalTime);
             }

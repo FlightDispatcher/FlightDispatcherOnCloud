@@ -25,24 +25,25 @@ namespace FlightDispatcher.Domain.Helpers
             return new FlightRouteModel
             {
                 Id = document.Id.ToString(),
-                AirLine =
+                AirLine = new()
                 {
                     Id = document.AirLine.Id.ToString(),
                     Name = document.AirLine.Name,
                     IATA = document.AirLine.IATA
                 },
-                DepartureAirport =
+                DepartureAirport = new()
                 {
                     Id = document.DepartureAirport.Id.ToString(),
                     Name = document.DepartureAirport.Name,
                     IATA = document.DepartureAirport.IATA
                 },
-                ArrivalAirport =
+                ArrivalAirport = new()
                 {
                     Id = document.ArrivalAirport.Id.ToString(),
                     Name = document.ArrivalAirport.Name,
                     IATA = document.ArrivalAirport.IATA
                 },
+                FlightNumber = document.FlightNumber,
                 DepartureTime = document.DepartureTime,
                 ArrivalTime = document.ArrivalTime
             };
@@ -70,24 +71,25 @@ namespace FlightDispatcher.Domain.Helpers
             return new FlightRouteDocument
             {
                 Id = ObjectId.Parse(model.Id),
-                AirLine =
+                AirLine = new()
                 {
                     Id = ObjectId.Parse(model.AirLine.Id),
                     Name = model.AirLine.Name,
                     IATA = model.AirLine.IATA
                 },
-                DepartureAirport =
+                DepartureAirport = new()
                 {
                     Id = ObjectId.Parse(model.DepartureAirport.Id),
                     Name = model.DepartureAirport.Name,
                     IATA = model.DepartureAirport.IATA
                 },
-                ArrivalAirport =
+                ArrivalAirport = new()
                 {
                     Id = ObjectId.Parse(model.ArrivalAirport.Id),
                     Name = model.ArrivalAirport.Name,
                     IATA = model.ArrivalAirport.IATA
                 },
+                FlightNumber = model.FlightNumber,
                 DepartureTime = model.DepartureTime,
                 ArrivalTime = model.ArrivalTime
             };

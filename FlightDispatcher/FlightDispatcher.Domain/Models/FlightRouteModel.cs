@@ -33,6 +33,11 @@ namespace FlightDispatcher.Domain.Models
         public FlightRouteAirportModel ArrivalAirport { get; set; }
 
         /// <summary>
+        /// Gets or sets the Flight Number of the flight route.
+        /// </summary>
+        public string FlightNumber { get; set; }
+
+        /// <summary>
         /// Gets or sets the departure time of the flight route.
         /// </summary>
         public string DepartureTime { get; set; }

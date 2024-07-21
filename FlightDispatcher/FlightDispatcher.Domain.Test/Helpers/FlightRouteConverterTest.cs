@@ -22,6 +22,7 @@ namespace FlightDispatcher.Domain.Test.Helpers
                 AirLine = new FlightRouteAirlineDocument { Id = ObjectId.GenerateNewId(), Name = "Airline One", IATA = "AL1" },
                 DepartureAirport = new FlightRouteAirportDocument { Id = ObjectId.GenerateNewId(), Name = "Departure Airport", IATA = "DEP" },
                 ArrivalAirport = new FlightRouteAirportDocument { Id = ObjectId.GenerateNewId(), Name = "Arrival Airport", IATA = "ARR" },
+                FlightNumber = "1",
                 DepartureTime = "10:00",
                 ArrivalTime = "13:00"
             };
@@ -40,6 +41,7 @@ namespace FlightDispatcher.Domain.Test.Helpers
             Assert.Equal(document.ArrivalAirport.Id.ToString(), model.ArrivalAirport.Id);
             Assert.Equal(document.ArrivalAirport.Name, model.ArrivalAirport.Name);
             Assert.Equal(document.ArrivalAirport.IATA, model.ArrivalAirport.IATA);
+            Assert.Equal(document.FlightNumber, model.FlightNumber);
             Assert.Equal(document.DepartureTime, model.DepartureTime);
             Assert.Equal(document.ArrivalTime, model.ArrivalTime);
         }
@@ -54,6 +56,7 @@ namespace FlightDispatcher.Domain.Test.Helpers
                 AirLine = new FlightRouteAirlineModel { Id = "615f7e3a5e2b4e001f0b8e5e", Name = "Airline Two", IATA = "AL2" },
                 DepartureAirport = new FlightRouteAirportModel { Id = "615f7e3a5e2b4e001f0b8e5f", Name = "Departure Airport", IATA = "DEP" },
                 ArrivalAirport = new FlightRouteAirportModel { Id = "615f7e3a5e2b4e001f0b8e60", Name = "Arrival Airport", IATA = "ARR" },
+                FlightNumber = "1",
                 DepartureTime = "13:00",
                 ArrivalTime = "18:00"
             };
@@ -72,6 +75,7 @@ namespace FlightDispatcher.Domain.Test.Helpers
             Assert.Equal(ObjectId.Parse(model.ArrivalAirport.Id), document.ArrivalAirport.Id);
             Assert.Equal(model.ArrivalAirport.Name, document.ArrivalAirport.Name);
             Assert.Equal(model.ArrivalAirport.IATA, document.ArrivalAirport.IATA);
+            Assert.Equal(model.FlightNumber, document.FlightNumber);
             Assert.Equal(model.DepartureTime, document.DepartureTime);
             Assert.Equal(model.ArrivalTime, document.ArrivalTime);
         }

@@ -47,6 +47,7 @@ namespace FlightDispatcher.Infostructure.Test.Repositories
                     Name = "Airport Two",
                     IATA = "T"
                 },
+                FlightNumber = "1",
                 DepartureTime = "13:00",
                 ArrivalTime = "15:00"
             };
@@ -71,6 +72,7 @@ namespace FlightDispatcher.Infostructure.Test.Repositories
                     Name = "Airport Four",
                     IATA = "F"
                 },
+                FlightNumber = "2",
                 DepartureTime = "18:00",
                 ArrivalTime = "20:00"
             };
@@ -111,6 +113,7 @@ namespace FlightDispatcher.Infostructure.Test.Repositories
                     Name = "Airport 6",
                     IATA = "6"
                 },
+                FlightNumber = "3",
                 DepartureTime = "10:00",
                 ArrivalTime = "17:00"
             };
@@ -149,6 +152,7 @@ namespace FlightDispatcher.Infostructure.Test.Repositories
                     Name = "Napoli",
                     IATA = "NAP"
                 },
+                FlightNumber = "FR1832",
                 DepartureTime = "20:50",
                 ArrivalTime = "22:45"
             };
@@ -189,6 +193,7 @@ namespace FlightDispatcher.Infostructure.Test.Repositories
                     Name = "Napoli",
                     IATA = "NAP"
                 },
+                FlightNumber = "FR1832",
                 DepartureTime = "20:50",
                 ArrivalTime = "22:45"
             };
@@ -230,6 +235,7 @@ namespace FlightDispatcher.Infostructure.Test.Repositories
                     Name = "Roma Ciampino",
                     IATA = "CIA"
                 },
+                FlightNumber = "FR1832",
                 DepartureTime = "06:30",
                 ArrivalTime = "08:20"
             };

@@ -9,13 +9,17 @@ using System.Threading.Tasks;
 
 namespace FlightDispatcher.Domain.Helpers
 {
-    /* 
-        This Converter Class transform CountryModel object in CountryDocument object and viceversa
-     */
-
+    /// <summary>
+    /// Provides methods to convert between <see cref="CountryDocument"/> and <see cref="CountryModel"/>.
+    /// </summary>
     public static class CountryConverter
     {
         #region Document -> Model
+        /// <summary>
+        /// Converts a <see cref="CountryDocument"/> to a <see cref="CountryModel"/>.
+        /// </summary>
+        /// <param name="document">The <see cref="CountryDocument"/> to convert.</param>
+        /// <returns>The converted <see cref="CountryModel"/>.</returns>
         public static CountryModel ToModel(this CountryDocument document)
         {
             return new CountryModel
@@ -26,6 +30,11 @@ namespace FlightDispatcher.Domain.Helpers
             };
         }
 
+        /// <summary>
+        /// Converts a list of <see cref="CountryDocument"/> to a list of <see cref="CountryModel"/>.
+        /// </summary>
+        /// <param name="documents">The list of <see cref="CountryDocument"/> to convert.</param>
+        /// <returns>The list of converted <see cref="CountryModel"/>.</returns>
         public static List<CountryModel> ToModelList(this List<CountryDocument> documents)
         {
             return documents.Select(ToModel).ToList();
@@ -33,6 +42,11 @@ namespace FlightDispatcher.Domain.Helpers
         #endregion
 
         #region Model -> Document
+        /// <summary>
+        /// Converts a <see cref="CountryModel"/> to a <see cref="CountryDocument"/>.
+        /// </summary>
+        /// <param name="model">The <see cref="CountryModel"/> to convert.</param>
+        /// <returns>The converted <see cref="CountryDocument"/>.</returns>
         public static CountryDocument ToDocument(this CountryModel model)
         {
             return new CountryDocument
@@ -43,6 +57,11 @@ namespace FlightDispatcher.Domain.Helpers
             };
         }
 
+        /// <summary>
+        /// Converts a list of <see cref="CountryModel"/> to a list of <see cref="CountryDocument"/>.
+        /// </summary>
+        /// <param name="models">The list of <see cref="CountryModel"/> to convert.</param>
+        /// <returns>The list of converted <see cref="CountryDocument"/>.</returns>
         public static List<CountryDocument> ToDocumentList(this List<CountryModel> models)
         {
             return models.Select(ToDocument).ToList();

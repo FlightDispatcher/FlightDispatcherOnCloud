@@ -7,10 +7,24 @@ using System.Threading.Tasks;
 
 namespace FlightDispatcher.Domain.Documents
 {
+    /// <summary>
+    /// Represents an airline document specifically for flight routes.
+    /// </summary>
     public class FlightRouteAirlineDocument
     {
+        /// <summary>
+        /// Gets or sets the unique identifier of the airline.
+        /// </summary>
         public ObjectId Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of the airline.
+        /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the IATA code of the airline.
+        /// </summary>
         public string IATA { get; set; }
     }
 }

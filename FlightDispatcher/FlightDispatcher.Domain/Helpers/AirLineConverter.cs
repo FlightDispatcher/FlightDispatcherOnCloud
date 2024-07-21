@@ -9,13 +9,18 @@ using System.Threading.Tasks;
 
 namespace FlightDispatcher.Domain.Helpers
 {
-    /* 
-        This Converter Class transform AirlineModel object in AirLineDocument object and viceversa
-     */
-
+    /// <summary>
+    /// Provides methods to convert between <see cref="AirlineDocument"/> and <see cref="AirlineModel"/>.
+    /// </summary>
     public static class AirlineConverter
     {
         #region Document -> Model
+
+        /// <summary>
+        /// Converts an <see cref="AirlineDocument"/> to an <see cref="AirlineModel"/>.
+        /// </summary>
+        /// <param name="document">The <see cref="AirlineDocument"/> to convert.</param>
+        /// <returns>The converted <see cref="AirlineModel"/>.</returns>
         public static AirlineModel ToModel(this AirlineDocument document)
         {
             return new AirlineModel
@@ -27,6 +32,11 @@ namespace FlightDispatcher.Domain.Helpers
             };
         }
 
+        /// <summary>
+        /// Converts a list of <see cref="AirlineDocument"/> to a list of <see cref="AirlineModel"/>.
+        /// </summary>
+        /// <param name="documents">The list of <see cref="AirlineDocument"/> to convert.</param>
+        /// <returns>The list of converted <see cref="AirlineModel"/>.</returns>
         public static List<AirlineModel> ToModelList(this List<AirlineDocument> documents)
         {
             return documents.Select(ToModel).ToList();
@@ -34,6 +44,12 @@ namespace FlightDispatcher.Domain.Helpers
         #endregion
 
         #region Model -> Document
+
+        /// <summary>
+        /// Converts an <see cref="AirlineModel"/> to an <see cref="AirlineDocument"/>.
+        /// </summary>
+        /// <param name="model">The <see cref="AirlineModel"/> to convert.</param>
+        /// <returns>The converted <see cref="AirlineDocument"/>.</returns>
         public static AirlineDocument ToDocument(this AirlineModel model)
         {
             return new AirlineDocument
@@ -45,6 +61,11 @@ namespace FlightDispatcher.Domain.Helpers
             };
         }
 
+        /// <summary>
+        /// Converts a list of <see cref="AirlineModel"/> to a list of <see cref="AirlineDocument"/>.
+        /// </summary>
+        /// <param name="models">The list of <see cref="AirlineModel"/> to convert.</param>
+        /// <returns>The list of converted <see cref="AirlineDocument"/>.</returns>
         public static List<AirlineDocument> ToDocumentList(this List<AirlineModel> models)
         {
             return models.Select(ToDocument).ToList();

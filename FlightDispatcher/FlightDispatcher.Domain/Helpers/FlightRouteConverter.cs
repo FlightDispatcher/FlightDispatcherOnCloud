@@ -9,13 +9,17 @@ using System.Threading.Tasks;
 
 namespace FlightDispatcher.Domain.Helpers
 {
-    /* 
-        This Converter Class transform FlightRouteModel object in FlightRouteDocument object and viceversa
-     */
-
+    /// <summary>
+    /// Provides methods to convert between <see cref="FlightRouteDocument"/> and <see cref="FlightRouteModel"/>.
+    /// </summary>
     public static class FlightRouteConverter
     {
         #region Document -> Model
+        /// <summary>
+        /// Converts a <see cref="FlightRouteDocument"/> to a <see cref="FlightRouteModel"/>.
+        /// </summary>
+        /// <param name="document">The <see cref="FlightRouteDocument"/> to convert.</param>
+        /// <returns>The converted <see cref="FlightRouteModel"/>.</returns>
         public static FlightRouteModel ToModel(this FlightRouteDocument document)
         {
             return new FlightRouteModel
@@ -44,6 +48,11 @@ namespace FlightDispatcher.Domain.Helpers
             };
         }
 
+        /// <summary>
+        /// Converts a list of <see cref="FlightRouteDocument"/> to a list of <see cref="FlightRouteModel"/>.
+        /// </summary>
+        /// <param name="documents">The list of <see cref="FlightRouteDocument"/> to convert.</param>
+        /// <returns>The list of converted <see cref="FlightRouteModel"/>.</returns>
         public static List<FlightRouteModel> ToModelList(this List<FlightRouteDocument> documents)
         {
             return documents.Select(ToModel).ToList();
@@ -51,6 +60,11 @@ namespace FlightDispatcher.Domain.Helpers
         #endregion
 
         #region Model -> Document
+        /// <summary>
+        /// Converts a <see cref="FlightRouteModel"/> to a <see cref="FlightRouteDocument"/>.
+        /// </summary>
+        /// <param name="model">The <see cref="FlightRouteModel"/> to convert.</param>
+        /// <returns>The converted <see cref="FlightRouteDocument"/>.</returns>
         public static FlightRouteDocument ToDocument(this FlightRouteModel model)
         {
             return new FlightRouteDocument
@@ -79,6 +93,11 @@ namespace FlightDispatcher.Domain.Helpers
             };
         }
 
+        /// <summary>
+        /// Converts a list of <see cref="FlightRouteModel"/> to a list of <see cref="FlightRouteDocument"/>.
+        /// </summary>
+        /// <param name="models">The list of <see cref="FlightRouteModel"/> to convert.</param>
+        /// <returns>The list of converted <see cref="FlightRouteDocument"/>.</returns>
         public static List<FlightRouteDocument> ToDocumentList(this List<FlightRouteModel> models)
         {
             return models.Select(ToDocument).ToList();

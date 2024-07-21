@@ -10,9 +10,15 @@ using System.Threading.Tasks;
 
 namespace FlightDispatcher.Infostructure.Repositories
 {
+    /// <summary>
+    /// Repository implementation for managing airline documents in a MongoDB collection.
+    /// </summary>
     public class AirlineRepository : RepositoryFullCRUD<AirlineDocument>, IAirlineRepository
     {
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AirlineRepository"/> class.
+        /// </summary>
+        /// <param name="database">The MongoDB database.</param>
         public AirlineRepository(IMongoDatabase database): base(database, "Airlines")
         {
             

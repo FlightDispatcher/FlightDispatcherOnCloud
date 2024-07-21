@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightDispatcher.Api.Test",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightDispatcher.Domain.Test", "FlightDispatcher.Domain.Test\FlightDispatcher.Domain.Test.csproj", "{BAC1DADB-C8DC-43AC-9E2C-F6DC9BA1C6C2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightDispatcher.Infostructure.Test", "FlightDispatcher.Infostructure.Test\FlightDispatcher.Infostructure.Test.csproj", "{84784C51-2D17-481A-A8E0-79150E135C43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightDispatcher.Infrastructure.Test", "FlightDispatcher.Infostructure.Test\FlightDispatcher.Infrastructure.Test.csproj", "{84784C51-2D17-481A-A8E0-79150E135C43}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

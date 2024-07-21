@@ -26,6 +26,11 @@ namespace FlightDispatcher.API.Services
         /// <returns>The created <see cref="AirlineModel"/>.</returns>
         public async Task<AirlineModel> Create(AirlineModel model)
         {
+            // Check if the IATA code is already in use
+            var existingAirline = await _airlineRepository.GetByIATACode(model.IATA);
+            if (existingAirline != null)
+                throw new AirlineCodeAlreadyInUseException($"An airline with IATA code {model.IATA} already exists.");
+
             var createdDocument = await _airlineRepository.Create(model.ToDocument());
             return createdDocument.ToModel();
         }
@@ -70,8 +75,27 @@ namespace FlightDispatcher.API.Services
         /// <returns>The updated <see cref="AirlineModel"/>.</returns>
         public async Task<AirlineModel> Update(AirlineModel model)
         {
+            // Check if the IATA code is already in use by another airline
+            var existingAirline = await _airlineRepository.GetByIATACode(model.IATA);
+            if (existingAirline != null && existingAirline.Id.ToString() != model.Id)
+                throw new AirlineCodeAlreadyInUseException($"An airline with IATA code {model.IATA} already exists.");
+
             var updatedDocument = await _airlineRepository.Update(model.ToDocument());
             return updatedDocument.ToModel();
+        }
+
+        /// <summary>
+        /// Retrieves an airline by its IATA code.
+        /// </summary>
+        /// <param name="code">The IATA code of the airline.</param>
+        /// <returns>A <see cref="AirlineModel"/>.</returns>
+        public async Task<AirlineModel> GetByIATACode(string code)
+        {
+            var document = await _airlineRepository.GetByIATACode(code);
+            if (document == null)
+                throw new AirlineCodeNotFoundException($"Airline with IATA code {code} not found.");
+
+            return document.ToModel();
         }
     }
 }

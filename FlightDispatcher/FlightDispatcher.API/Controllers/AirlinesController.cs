@@ -61,8 +61,15 @@ namespace FlightDispatcher.API.Controllers
         [HttpPost]
         public async Task<ActionResult<AirlineDTO>> Create([FromBody] AirlineDTO dto)
         {
-            var createdAirline = await _airlineService.Create(dto.ToModel());
-            return CreatedAtAction(nameof(GetById), new { id = createdAirline.Id }, createdAirline.ToDTO());
+            try
+            {
+                var createdAirline = await _airlineService.Create(dto.ToModel());
+                return CreatedAtAction(nameof(GetById), new { id = createdAirline.Id }, createdAirline.ToDTO());
+            }
+            catch (AirlineCodeAlreadyInUseException ex)
+            {
+                return Conflict(ex.Message);
+            }
         }
 
         /// <summary>
@@ -77,8 +84,15 @@ namespace FlightDispatcher.API.Controllers
             if (id != dto.Id)
                 return BadRequest("ID mismatch.");
 
-            var updatedAirline = await _airlineService.Update(dto.ToModel());
-            return Ok(updatedAirline);
+            try
+            {
+                var updatedAirline = await _airlineService.Update(dto.ToModel());
+                return Ok(updatedAirline);
+            }
+            catch (AirlineCodeAlreadyInUseException ex)
+            {
+                return Conflict(ex.Message);
+            }
         }
 
         /// <summary>
@@ -90,6 +104,25 @@ namespace FlightDispatcher.API.Controllers
         {
             await _airlineService.Delete(id);
             return NoContent();
+        }
+
+        /// <summary>
+        /// Gets an airline by its IATA code.
+        /// </summary>
+        /// <param name="code">The IATA code of the airline.</param>
+        /// <returns>An <see cref="AirlineModel"/>.</returns>
+        [HttpGet("iata/{code}")]
+        public async Task<ActionResult<AirlineModel>> GetByIATACode(string code)
+        {
+            try
+            {
+                var airline = await _airlineService.GetByIATACode(code);
+                return Ok(airline);
+            }
+            catch (AirlineCodeNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
     }
 }

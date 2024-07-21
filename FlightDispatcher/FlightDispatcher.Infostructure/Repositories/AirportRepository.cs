@@ -23,5 +23,15 @@ namespace FlightDispatcher.Infostructure.Repositories
         {
             
         }
+
+        /// <summary>
+        /// Retrieves an airport document by its IATA code.
+        /// </summary>
+        /// <param name="code">The IATA code of the airport.</param>
+        /// <returns>The airport document with the specified IATA code.</returns>
+        public async Task<AirportDocument> GetByIATACode(string code)
+        {
+            return await _collection.Find(doc => doc.IATA == code).FirstOrDefaultAsync();
+        }
     }
 }

@@ -30,8 +30,7 @@ namespace FlightDispatcher.Infostructure.Repositories
         /// <returns>The country document with the specified code, or null if not found.</returns>
         public async Task<CountryDocument> GetByCode(string code)
         {
-            var filter = Builders<CountryDocument>.Filter.Eq(c => c.Code, code);
-            return await _collection.Find(filter).FirstOrDefaultAsync();
+            return await _collection.Find(doc => doc.Code == code).FirstOrDefaultAsync();
         }
     }
 }

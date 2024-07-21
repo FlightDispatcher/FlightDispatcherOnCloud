@@ -16,5 +16,12 @@ namespace FlightDispatcher.Infostructure.Interfaces
         // IRepositoryBase<AirportDocument> provides methods to get all documents and to get a document by its ID.
         // IRepositoryEditable<AirportDocument> provides methods to create and update documents.
         // IRepositoryErasable provides a method to delete a document by its ID.
+
+        /// <summary>
+        /// Retrieves an airport document by its IATA code.
+        /// </summary>
+        /// <param name="code">The IATA code of the airport.</param>
+        /// <returns>The airport document with the specified IATA code.</returns>
+        Task<AirportDocument> GetByIATACode(string code);
     }
 }

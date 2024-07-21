@@ -112,5 +112,33 @@ namespace FlightDispatcher.Api.Test.Services
             // Assert
             _mockAirportRepository.Verify(repo => repo.Delete(It.IsAny<ObjectId>()), Times.Once);
         }
+
+        [Fact]
+        public async Task GetByIATACode_ShouldReturnAirport_WhenAirportExists()
+        {
+            // Arrange
+            var iata = "JFK";
+            var airportDocument = new AirportDocument { Id = ObjectId.GenerateNewId(), Name = "John F. Kennedy International Airport", IATA = iata, ICAO = "KJFK", Location = "New York", Country = "USA" };
+            _mockAirportRepository.Setup(repo => repo.GetByIATACode(iata)).ReturnsAsync(airportDocument);
+
+            // Act
+            var result = await _airportService.GetByIATACode(iata);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(iata, result.IATA);
+        }
+
+        [Fact]
+        public async Task GetByIATACode_ShouldThrowNotFoundException_WhenAirportDoesNotExist()
+        {
+            // Arrange
+            var iata = "JFK";
+            _mockAirportRepository.Setup(repo => repo.GetByIATACode(iata)).ReturnsAsync((AirportDocument)null);
+
+            // Act & Assert
+            var exception = await Assert.ThrowsAsync<NotFoundException>(() => _airportService.GetByIATACode(iata));
+            Assert.Equal($"Airport with IATA code {iata} not found.", exception.Message);
+        }
     }
 }

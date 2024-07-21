@@ -112,5 +112,33 @@ namespace FlightDispatcher.Api.Test.Services
             // Assert
             _mockAirlineRepository.Verify(repo => repo.Delete(It.IsAny<ObjectId>()), Times.Once);
         }
+
+        [Fact]
+        public async Task GetByIATACode_ShouldReturnAirline_WhenAirlineExists()
+        {
+            // Arrange
+            var iata = "AA";
+            var airlineDocument = new AirlineDocument { Id = ObjectId.GenerateNewId(), Name = "American Airlines", IATA = iata, ICAO = "AAL" };
+            _mockAirlineRepository.Setup(repo => repo.GetByIATACode(iata)).ReturnsAsync(airlineDocument);
+
+            // Act
+            var result = await _airlineService.GetByIATACode(iata);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(iata, result.IATA);
+        }
+
+        [Fact]
+        public async Task GetByIATACode_ShouldThrowNotFoundException_WhenAirlineDoesNotExist()
+        {
+            // Arrange
+            var iata = "AA";
+            _mockAirlineRepository.Setup(repo => repo.GetByIATACode(iata)).ReturnsAsync((AirlineDocument)null);
+
+            // Act & Assert
+            var exception = await Assert.ThrowsAsync<NotFoundException>(() => _airlineService.GetByIATACode(iata));
+            Assert.Equal($"Airline with IATA code {iata} not found.", exception.Message);
+        }
     }
 }

@@ -60,8 +60,19 @@ namespace FlightDispatcher.API.Controllers
         [HttpPost]
         public async Task<ActionResult<AirportDTO>> Create([FromBody] AirportDTO dto)
         {
-            var createdAirport = await _airportService.Create(dto.ToModel());
-            return CreatedAtAction(nameof(GetById), new { id = createdAirport.Id }, createdAirport.ToDTO());
+            try
+            {
+                var createdAirport = await _airportService.Create(dto.ToModel());
+                return CreatedAtAction(nameof(GetById), new { id = createdAirport.Id }, createdAirport.ToDTO());
+            }
+            catch (CountryCodeNotFoundException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (AirportCodeAlreadyInUseException ex)
+            {
+                return Conflict(ex.Message);
+            }
         }
 
         /// <summary>
@@ -75,9 +86,20 @@ namespace FlightDispatcher.API.Controllers
         {
             if (id != dto.Id)
                 return BadRequest("ID mismatch.");
-
-            var updatedAirport = await _airportService.Update(dto.ToModel());
-            return Ok(updatedAirport);
+            
+            try
+            {
+                var updatedAirport = await _airportService.Update(dto.ToModel());
+                return Ok(updatedAirport);
+            }
+            catch (CountryCodeNotFoundException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (AirportCodeAlreadyInUseException ex)
+            {
+                return Conflict(ex.Message);
+            }
         }
 
         /// <summary>
@@ -89,6 +111,25 @@ namespace FlightDispatcher.API.Controllers
         {
             await _airportService.Delete(id);
             return NoContent();
+        }
+
+        /// <summary>
+        /// Gets an airport by its IATA code.
+        /// </summary>
+        /// <param name="code">The IATA code of the airport.</param>
+        /// <returns>An <see cref="AirportModel"/>.</returns>
+        [HttpGet("iata/{code}")]
+        public async Task<ActionResult<AirportModel>> GetByIATACode(string code)
+        {
+            try
+            {
+                var airport = await _airportService.GetByIATACode(code);
+                return Ok(airport);
+            }
+            catch (AirportCodeNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
     }
 }

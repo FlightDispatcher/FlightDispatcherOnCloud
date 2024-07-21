@@ -5,7 +5,6 @@ namespace FlightDispatcher.API.DTOs
 {
     public class FlightRouteDTO
     {
-        [Required(ErrorMessage = "Id is required")]
         public string Id { get; set; }
 
         public FlightRouteAirlineDTO AirLine { get; set; }

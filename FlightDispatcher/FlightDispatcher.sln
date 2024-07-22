@@ -19,15 +19,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightDispatcher.Domain.Tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightDispatcher.Infrastructure.Test", "FlightDispatcher.Infostructure.Test\FlightDispatcher.Infrastructure.Test.csproj", "{84784C51-2D17-481A-A8E0-79150E135C43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightDispatcher.FrontEnd.WebApp", "FlightDispatcher.FrontEnd.WebApp\FlightDispatcher.FrontEnd.WebApp.csproj", "{456DC325-B8D8-498B-8F01-6518F1A8789A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightDispatcher.FrontEnd.WebApp", "FlightDispatcher.FrontEnd.WebApp\FlightDispatcher.FrontEnd.WebApp.csproj", "{456DC325-B8D8-498B-8F01-6518F1A8789A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightDispatcher.FrontEnd.Components", "FlightDispatcher.FrontEnd.Components\FlightDispatcher.FrontEnd.Components.csproj", "{56A58D7E-1CB3-4180-A7F9-21DFB3F52241}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightDispatcher.FrontEnd.Components", "FlightDispatcher.FrontEnd.Components\FlightDispatcher.FrontEnd.Components.csproj", "{56A58D7E-1CB3-4180-A7F9-21DFB3F52241}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightDispatcher.FrontEnd.Services", "FlightDispatcher.FrontEnd.Services\FlightDispatcher.FrontEnd.Services.csproj", "{35005125-A4EA-4952-AA5F-277C5F65623C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightDispatcher.FrontEnd.Services", "FlightDispatcher.FrontEnd.Services\FlightDispatcher.FrontEnd.Services.csproj", "{35005125-A4EA-4952-AA5F-277C5F65623C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightDispatcher.FrontEnd.Domain", "FlightDispatcher.FrontEnd.Domain\FlightDispatcher.FrontEnd.Domain.csproj", "{C9A36D44-3545-4D8E-8F97-FB3DE435535E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightDispatcher.FrontEnd.Domain", "FlightDispatcher.FrontEnd.Domain\FlightDispatcher.FrontEnd.Domain.csproj", "{C9A36D44-3545-4D8E-8F97-FB3DE435535E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightDispatcher.FrontEnd.Shared", "FlightDispatcher.FrontEnd.Shared\FlightDispatcher.FrontEnd.Shared.csproj", "{E8F01CF8-0916-4953-BC36-B285D5BB8016}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightDispatcher.FrontEnd.Shared", "FlightDispatcher.FrontEnd.Shared\FlightDispatcher.FrontEnd.Shared.csproj", "{E8F01CF8-0916-4953-BC36-B285D5BB8016}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FrontEnd", "FrontEnd", "{D2BFD881-8F72-47F8-B7C7-6EFD384DDA02}"
 EndProject

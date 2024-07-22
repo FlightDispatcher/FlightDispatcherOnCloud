@@ -6,4 +6,34 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="Components\Fluxor.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Auth0.AspNetCore.Authentication" Version="1.4.1" />
+    <PackageReference Include="Fluxor.Blazor.Web" Version="6.0.0" />
+    <PackageReference Include="Fluxor.Blazor.Web.ReduxDevTools" Version="6.0.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FlightDispatcher.FrontEnd.Components\FlightDispatcher.FrontEnd.Components.csproj" />
+    <ProjectReference Include="..\FlightDispatcher.FrontEnd.Domain\FlightDispatcher.FrontEnd.Domain.csproj" />
+    <ProjectReference Include="..\FlightDispatcher.FrontEnd.Services\FlightDispatcher.FrontEnd.Services.csproj" />
+    <ProjectReference Include="..\FlightDispatcher.FrontEnd.Shared\FlightDispatcher.FrontEnd.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Components\Fluxor.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Components\Fluxor.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Components\Fluxor.razor" />
+  </ItemGroup>
+
 </Project>

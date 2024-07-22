@@ -12,7 +12,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Fluxor.Blazor.Web" Version="6.0.0" />
+    <PackageReference Include="Fluxor.Blazor.Web.ReduxDevTools" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FlightDispatcher.FrontEnd.Domain\FlightDispatcher.FrontEnd.Domain.csproj" />
   </ItemGroup>
 
 </Project>

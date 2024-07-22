@@ -45,7 +45,7 @@ builder.Services.AddFluxor(options =>
 #if DEBUG
     options.UseReduxDevTools(settings =>
     {
-        settings.Name = "Gardiff Payments Platform for Adyen";
+        settings.Name = "Flight Dispatcher - FrontEnd";
     });
 #endif
 });

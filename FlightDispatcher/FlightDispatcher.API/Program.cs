@@ -25,15 +25,15 @@ builder.Services.AddScoped<IMongoDatabase>(x =>
 
 // Auth0 implementation
 // 1. Add Authentication Services
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options =>
-{
-    options.Authority = "https://dev-6cqpy6gyp63oihc0.us.auth0.com/";
-    options.Audience = "api.flightdispatcher.cloud";
-});
+//builder.Services.AddAuthentication(options =>
+//{
+//    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+//    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+//}).AddJwtBearer(options =>
+//{
+//    options.Authority = "https://dev-6cqpy6gyp63oihc0.us.auth0.com/";
+//    options.Audience = "api.flightdispatcher.cloud";
+//});
 
 // Register repositories
 builder.Services.AddScoped<ICountryRepository, CountryRepository>();
